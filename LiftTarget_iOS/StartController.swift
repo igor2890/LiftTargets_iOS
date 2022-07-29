@@ -72,6 +72,12 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
         textView.text = text + "\n" + message
     }
     
+    private func errorHandler(error: Error?) {
+        showMessage(message: systemText + error.debugDescription)
+        disconnect()
+        clearCBObjects()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendMessageToPeripheral()
         return true
@@ -174,7 +180,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         guard error == nil else {
-            showMessage(message: systemText + error.debugDescription)
+            errorHandler(error: error)
             return
         }
         showMessage(message: systemText + "disconnected")
@@ -210,7 +216,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard error == nil else {
-            showMessage(message: systemText + error.debugDescription)
+            errorHandler(error: error)
             return
         }
         guard let services = peripheral.services else {
@@ -226,7 +232,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard error == nil else {
-            showMessage(message: systemText + error.debugDescription)
+            errorHandler(error: error)
             return
         }
         guard let characteristics = service.characteristics else {
@@ -244,7 +250,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-            showMessage(message: systemText + error.debugDescription)
+            errorHandler(error: error)
             return
         }
         guard let descriptors = characteristic.descriptors
@@ -259,7 +265,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-            showMessage(message: systemText + error.debugDescription)
+            errorHandler(error: error)
             return
         }
         showMessage(message: systemText + "ready for incomming")
@@ -268,7 +274,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-            showMessage(message: systemText + error.debugDescription)
+            errorHandler(error: error)
             return
         }
         guard let value = characteristic.value else { return }
@@ -285,7 +291,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-            showMessage(message: systemText + error.debugDescription)
+            errorHandler(error: error)
             return
         }
         showMessage(message: systemText + "sended")
