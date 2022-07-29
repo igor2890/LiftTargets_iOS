@@ -234,9 +234,11 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
             return
         }
         for characteristic in characteristics {
-            myCharactericric = characteristic
-            peripheral.discoverDescriptors(for: characteristic)
-            peripheral.setNotifyValue(true, for: characteristic)
+            if characteristic.uuid == CBUUID(string: "FFE1") {
+                myCharactericric = characteristic
+                peripheral.discoverDescriptors(for: characteristic)
+                peripheral.setNotifyValue(true, for: characteristic)
+            }
         }
     }
     
