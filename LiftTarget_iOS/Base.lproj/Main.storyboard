@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9PG-ku-tlb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -30,7 +30,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r50-NV-7nL">
-                                <rect key="frame" x="178.5" y="598" width="57" height="31"/>
+                                <rect key="frame" x="178.5" y="573" width="57" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Scan"/>
                                 <connections>
@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDU-QU-I9D">
-                                <rect key="frame" x="158.5" y="667" width="97" height="31"/>
+                                <rect key="frame" x="158.5" y="642" width="97" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Disconnect"/>
                                 <connections>
@@ -46,51 +46,127 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="plX-Op-QuT">
-                                <rect key="frame" x="20.5" y="64" width="373" height="347"/>
+                                <rect key="frame" x="20.5" y="108" width="373" height="283"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lK-C0-KEY">
+                                <rect key="frame" x="324.5" y="360" width="69" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="CLEAR"/>
+                                <connections>
+                                    <action selector="clearTextViewTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ic2-HP-Zs6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AR9-8a-91v">
+                                <rect key="frame" x="175" y="713" width="64" height="32.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="PLAY">
+                                            <attributes>
+                                                <font key="NSFont" size="16" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="playTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Bv-cc-U6s"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                         <constraints>
-                            <constraint firstItem="eKT-Qz-JJn" firstAttribute="top" secondItem="plX-Op-QuT" secondAttribute="bottom" constant="20" id="01A-6n-XBa"/>
+                            <constraint firstItem="eKT-Qz-JJn" firstAttribute="top" secondItem="plX-Op-QuT" secondAttribute="bottom" constant="40" id="01A-6n-XBa"/>
                             <constraint firstItem="r50-NV-7nL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1qz-NM-MOB"/>
                             <constraint firstItem="eKT-Qz-JJn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9a5-CJ-5zl"/>
+                            <constraint firstItem="plX-Op-QuT" firstAttribute="trailing" secondItem="4lK-C0-KEY" secondAttribute="trailing" id="BGk-v4-eNU"/>
                             <constraint firstItem="87H-1T-ihN" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.3" id="KUa-U5-R7l"/>
                             <constraint firstItem="eKT-Qz-JJn" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="ORg-G9-hDA"/>
                             <constraint firstItem="87H-1T-ihN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Oba-6y-qO8"/>
                             <constraint firstItem="dDU-QU-I9D" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Qef-9s-0SY"/>
                             <constraint firstItem="87H-1T-ihN" firstAttribute="top" secondItem="eKT-Qz-JJn" secondAttribute="bottom" constant="37" id="RTW-6d-MCg"/>
+                            <constraint firstItem="plX-Op-QuT" firstAttribute="bottom" secondItem="4lK-C0-KEY" secondAttribute="bottom" id="SPQ-Bh-egq"/>
                             <constraint firstItem="plX-Op-QuT" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.9" id="TpT-Vd-Fn7"/>
                             <constraint firstItem="dDU-QU-I9D" firstAttribute="top" secondItem="r50-NV-7nL" secondAttribute="bottom" constant="38" id="VEj-vg-S4x"/>
-                            <constraint firstItem="r50-NV-7nL" firstAttribute="top" secondItem="87H-1T-ihN" secondAttribute="bottom" constant="65" id="gym-5x-LrF"/>
+                            <constraint firstItem="r50-NV-7nL" firstAttribute="top" secondItem="87H-1T-ihN" secondAttribute="bottom" constant="40" id="gym-5x-LrF"/>
                             <constraint firstItem="plX-Op-QuT" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="h6o-Kv-gxa"/>
+                            <constraint firstItem="AR9-8a-91v" firstAttribute="top" secondItem="dDU-QU-I9D" secondAttribute="bottom" constant="40" id="hpl-zh-oz7"/>
                             <constraint firstItem="plX-Op-QuT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="nN1-1z-llQ"/>
+                            <constraint firstItem="AR9-8a-91v" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="nUz-rW-7df"/>
                             <constraint firstItem="eKT-Qz-JJn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ode-Wd-MZk"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Bxt-NU-3ih"/>
                     <connections>
                         <outlet property="disconnectButton" destination="dDU-QU-I9D" id="QZq-3J-6px"/>
+                        <outlet property="playButton" destination="AR9-8a-91v" id="8hf-Kp-n8t"/>
                         <outlet property="scanButton" destination="r50-NV-7nL" id="NDH-yl-nH6"/>
                         <outlet property="sendButton" destination="87H-1T-ihN" id="crQ-pY-Qf0"/>
                         <outlet property="textField" destination="eKT-Qz-JJn" id="G9a-bb-vFr"/>
                         <outlet property="textView" destination="plX-Op-QuT" id="mRf-47-urR"/>
                         <segue destination="5VE-Sg-HFV" kind="show" identifier="showScan" id="8w3-Ne-EC0"/>
+                        <segue destination="jpT-tM-m8p" kind="show" identifier="showGameConfig" id="Drh-eU-Ry7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-17.39130434782609" y="66.964285714285708"/>
+            <point key="canvasLocation" x="892.75362318840587" y="66.964285714285708"/>
+        </scene>
+        <!--Configure Game Controller-->
+        <scene sceneID="uzg-p6-WuI">
+            <objects>
+                <tableViewController id="jpT-tM-m8p" customClass="ConfigureGameController" customModule="LiftTarget_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Vsc-AW-KDp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="jpT-tM-m8p" id="eug-0S-nC1"/>
+                            <outlet property="delegate" destination="jpT-tM-m8p" id="yIW-dx-lAc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="qgY-Zy-8KH">
+                        <barButtonItem key="rightBarButtonItem" title="PLAY!" id="FSA-uj-DlT">
+                            <connections>
+                                <action selector="playTapped:" destination="jpT-tM-m8p" id="puz-g9-Izq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="playButton" destination="FSA-uj-DlT" id="MU5-ju-aGg"/>
+                        <segue destination="Rex-nC-kwc" kind="show" identifier="startGame" id="4Hb-Ui-8e2"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TLW-z3-Fo5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1652" y="388"/>
+        </scene>
+        <!--Game Controller-->
+        <scene sceneID="Ul1-GU-2gR">
+            <objects>
+                <viewController id="Rex-nC-kwc" customClass="GameController" customModule="LiftTarget_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cbn-DH-whz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="3PX-SW-6uh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="F7P-Vs-NJR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="unQ-RS-i7z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2471" y="388"/>
         </scene>
         <!--Peripherals Controller-->
         <scene sceneID="4Kc-zd-8ut">
             <objects>
                 <tableViewController id="5VE-Sg-HFV" customClass="PeripheralsController" customModule="LiftTarget_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Sdc-uW-2yX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -121,7 +197,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBi-dF-XLB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="858" y="67"/>
+            <point key="canvasLocation" x="1657.9710144927537" y="-333.48214285714283"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HJl-cE-G1K">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9PG-ku-tlb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fkw-6U-8ls">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="jiu-1B-wcn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M2E-zF-nsp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-17.39130434782609" y="66.964285714285708"/>
         </scene>
     </scenes>
     <resources>

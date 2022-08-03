@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		402223C6289B039800859817 /* ConfigureGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402223C5289B039800859817 /* ConfigureGameController.swift */; };
+		402223C8289B1A8E00859817 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402223C7289B1A8E00859817 /* GameController.swift */; };
+		402223CB289B20CC00859817 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402223CA289B20CC00859817 /* BluetoothManager.swift */; };
 		40A8F9FB287049FF000BCFF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8F9FA287049FF000BCFF6 /* AppDelegate.swift */; };
 		40A8F9FD287049FF000BCFF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8F9FC287049FF000BCFF6 /* SceneDelegate.swift */; };
 		40A8F9FF287049FF000BCFF6 /* StartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8F9FE287049FF000BCFF6 /* StartController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		402223C5289B039800859817 /* ConfigureGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureGameController.swift; sourceTree = "<group>"; };
+		402223C7289B1A8E00859817 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		402223CA289B20CC00859817 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		40A8F9F7287049FF000BCFF6 /* LiftTarget_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiftTarget_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40A8F9FA287049FF000BCFF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40A8F9FC287049FF000BCFF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		402223C9289B20B200859817 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				402223CA289B20CC00859817 /* BluetoothManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		40A8F9EE287049FF000BCFF6 = {
 			isa = PBXGroup;
 			children = (
@@ -58,9 +72,12 @@
 		40A8F9F9287049FF000BCFF6 /* LiftTarget_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				402223C9289B20B200859817 /* Services */,
+				40A8F9FE287049FF000BCFF6 /* StartController.swift */,
+				402223C5289B039800859817 /* ConfigureGameController.swift */,
+				402223C7289B1A8E00859817 /* GameController.swift */,
 				40A8F9FA287049FF000BCFF6 /* AppDelegate.swift */,
 				40A8F9FC287049FF000BCFF6 /* SceneDelegate.swift */,
-				40A8F9FE287049FF000BCFF6 /* StartController.swift */,
 				40A8FA0E28704E69000BCFF6 /* PeripheralsController.swift */,
 				40A8FA00287049FF000BCFF6 /* Main.storyboard */,
 				40A8FA0328704A00000BCFF6 /* Assets.xcassets */,
@@ -144,6 +161,9 @@
 				40A8F9FF287049FF000BCFF6 /* StartController.swift in Sources */,
 				40A8F9FB287049FF000BCFF6 /* AppDelegate.swift in Sources */,
 				40A8F9FD287049FF000BCFF6 /* SceneDelegate.swift in Sources */,
+				402223CB289B20CC00859817 /* BluetoothManager.swift in Sources */,
+				402223C8289B1A8E00859817 /* GameController.swift in Sources */,
+				402223C6289B039800859817 /* ConfigureGameController.swift in Sources */,
 				40A8FA0F28704E69000BCFF6 /* PeripheralsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

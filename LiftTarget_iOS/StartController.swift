@@ -15,6 +15,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var disconnectButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
     
     var bleManager: CBCentralManager?
     var peripheralManager: CBPeripheralManager!
@@ -23,9 +24,11 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
             if newValue != nil {
                 disconnectButton.isEnabled = true
                 scanButton.isEnabled = false
+                playButton.isEnabled = true
             } else {
                 disconnectButton.isEnabled = false
                 scanButton.isEnabled = true
+                playButton.isEnabled = false
             }
         }
     }
@@ -53,9 +56,15 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
         scanButton.isEnabled = false
         sendButton.isEnabled = false
         disconnectButton.isEnabled = false
+        //TODO: TEST!!! CHANGE TO FALSE WHEN REAL USE
+        playButton.isEnabled = true
         
         configureTextView()
         configureKeyboard()
+    }
+    
+    @IBAction func playTapped(_ sender: Any) {
+        performSegue(withIdentifier: "showGameConfig", sender: nil)
     }
     
     //MARK: TextViews
@@ -65,6 +74,10 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
         textView.text = systemText + "Hello!"
         let range = NSRange(location: textView.text.count - 1, length: 0)
         textView.scrollRangeToVisible(range)
+    }
+    
+    @IBAction func clearTextViewTapped(_ sender: Any) {
+        textView.text = ""
     }
     
     private func showMessage(message: String) {
@@ -149,10 +162,13 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     //MARK: PrepareForSegue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let tableVC = segue.destination as? PeripheralsController
-        else { return }
+        if let tableVC = segue.destination as? PeripheralsController
+        {
         tableVC.bleManager = bleManager
         tableVC.rootVC = self
+        } else if let configVC = segue.destination as? ConfigureGameController {
+
+        }
     }
     
     //MARK: CentralManager
