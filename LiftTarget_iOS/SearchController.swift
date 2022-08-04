@@ -6,35 +6,24 @@
 //
 
 import UIKit
-import CoreBluetooth
 
-class PeripheralsController: UITableViewController {
+class SearchController: UITableViewController {
     
-    var bleManager: CBCentralManager!
-    var peripherals: Set<CBPeripheral> = [] {
-        didSet {
-            peripheralsArray = Array(peripherals)
-                .sorted { $0.name! > $1.name!
-            }
-        }
-    }
-    var peripheralsArray = [CBPeripheral]() {
+    var peripheralsInfoList: [(String,String)] = [] {
         didSet {
             tableView.reloadData()
         }
     }
-    
-    weak var rootVC: StartController!
+    var startVC: StartControllerProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        rootVC.tableViewVC = self
         tableView.largeContentTitle = "Devices"
-        bleManager.scanForPeripherals(withServices: [CBUUID(string: "FFE0")], options: nil)
+        startVC.startScan()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        bleManager.stopScan()
+        startVC.stopScan()
     }
 
     // MARK: - Table view data source
@@ -47,7 +36,7 @@ class PeripheralsController: UITableViewController {
         if section == 0 {
             return 3
         } else {
-            return peripheralsArray.count
+            return peripheralsInfoList.count
         }
     }
 
@@ -56,19 +45,18 @@ class PeripheralsController: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         if indexPath.section == 1 {
-            let peripheral = peripheralsArray[indexPath.row]
-            bleManager.connect(peripheral, options: nil)
-            dismiss(animated: true)
+            startVC.connect(peripheralAt: indexPath.row)
+            navigationController?.popViewController(animated: true)
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuse") else { return UITableViewCell() }
-            let peripheral = peripheralsArray[indexPath.row]
+            let peripheralInfo = peripheralsInfoList[indexPath.row]
             var config = cell.defaultContentConfiguration()
-            config.text = peripheral.name
-            config.secondaryText = peripheral.identifier.uuidString
+            config.text = peripheralInfo.0
+            config.secondaryText = peripheralInfo.1
             cell.contentConfiguration = config
             return cell
         } else {

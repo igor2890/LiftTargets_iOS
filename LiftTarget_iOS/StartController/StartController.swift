@@ -17,8 +17,24 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     @IBOutlet weak var disconnectButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     
-    var bleManager: CBCentralManager?
-    var peripheralManager: CBPeripheralManager!
+    var watchers: [BluetoothWatcher?] = []
+    var centralBluetoothManager: CBCentralManager!
+    var peripherals: Set<CBPeripheral> = [] {
+        didSet {
+            peripheralsArray = Array(peripherals)
+                .sorted { $0.name! > $1.name!
+            }
+        }
+    }
+    var peripheralsArray = [CBPeripheral]() {
+        didSet {
+            searchVC?.peripheralsInfoList = peripheralsArray.map{
+                ($0.name ?? "" ,$0.identifier.uuidString)
+            }
+        }
+    }
+    
+    var peripheralBluetoothManager: CBPeripheralManager!
     var myPeripheral: CBPeripheral? {
         willSet {
             if newValue != nil {
@@ -42,7 +58,8 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
         }
     }
     var myDescriptor: CBDescriptor?
-    var tableViewVC: PeripheralsController?
+    var searchVC: SearchController?
+    var gameVC: GameController?
     
     let systemText = "system:    "
     let incomingText = "incoming:  "
@@ -51,8 +68,8 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        bleManager = CBCentralManager(delegate:self, queue:nil, options: nil)
-        peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        centralBluetoothManager = CBCentralManager(delegate:self, queue:nil, options: nil)
+        peripheralBluetoothManager = CBPeripheralManager(delegate: self, queue: nil)
         scanButton.isEnabled = false
         sendButton.isEnabled = false
         disconnectButton.isEnabled = false
@@ -155,19 +172,19 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     }
     
     private func disconnect() {
-        if let peripheral = myPeripheral { bleManager?.cancelPeripheralConnection(peripheral)
+        if let peripheral = myPeripheral { centralBluetoothManager.cancelPeripheralConnection(peripheral)
         }
     }
     
     //MARK: PrepareForSegue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let tableVC = segue.destination as? PeripheralsController
+        if let searchVC = segue.destination as? SearchController
         {
-        tableVC.bleManager = bleManager
-        tableVC.rootVC = self
+            searchVC.startVC = self as StartControllerProtocol
+            self.searchVC = searchVC
         } else if let configVC = segue.destination as? ConfigureGameController {
-
+            configVC.startVC = self as BluetoothManager
         }
     }
     
@@ -182,7 +199,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        tableViewVC?.peripherals.insert(peripheral)
+        peripherals.insert(peripheral)
     }
     
     

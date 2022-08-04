@@ -18,6 +18,7 @@ class ConfigureGameController: UITableViewController {
         }
     }
     private var settings: [String] = ["hi","ho","ha","he"]
+    weak var startVC: BluetoothManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +127,7 @@ class ConfigureGameController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let gameVC = segue.destination as? GameController else { return }
         gameVC.players = players
+        gameVC.startVC = startVC
     }
 
 }

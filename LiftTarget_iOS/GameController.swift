@@ -10,12 +10,15 @@ import UIKit
 class GameController: UIViewController {
 
     var players: [String] = []
+    weak var startVC: BluetoothManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
+        
+        startVC.subscibe(watcher: self)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscape }
@@ -33,6 +36,11 @@ class GameController: UIViewController {
         super.viewDidDisappear(animated)
         UIApplication.shared.isIdleTimerDisabled = false
     }
+}
 
-
+extension GameController: BluetoothWatcher {
+    func receiveFromPeripheral(bytes: [UInt8]) {
+        print("incoming bytes received")
+    }
+    
 }

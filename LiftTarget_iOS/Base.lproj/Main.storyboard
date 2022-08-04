@@ -161,10 +161,10 @@
             </objects>
             <point key="canvasLocation" x="2471" y="388"/>
         </scene>
-        <!--Peripherals Controller-->
+        <!--Search Controller-->
         <scene sceneID="4Kc-zd-8ut">
             <objects>
-                <tableViewController id="5VE-Sg-HFV" customClass="PeripheralsController" customModule="LiftTarget_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="5VE-Sg-HFV" customClass="SearchController" customModule="LiftTarget_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Sdc-uW-2yX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
