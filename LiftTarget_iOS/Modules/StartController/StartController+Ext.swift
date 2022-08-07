@@ -15,12 +15,12 @@ protocol StartControllerProtocol: AnyObject {
 }
 
 protocol BluetoothWatcher: AnyObject {
-    func receiveFromPeripheral(bytes: [UInt8])
+    func receiveFromTarget(notification: TargetNotification)
 }
 
 protocol BluetoothManager: AnyObject {
     func subscibe(watcher: BluetoothWatcher)
-    func sendToPeripheral(bytes: [UInt8])
+    func notificationWatchers(bytes: [UInt8])
 }
 
 extension StartController: StartControllerProtocol {
@@ -47,8 +47,9 @@ extension StartController: BluetoothManager {
         watchers.append(newWatcher)
     }
     
-    func sendToPeripheral(bytes: [UInt8]) {
-        watchers.forEach { $0?.receiveFromPeripheral(bytes: bytes) }
+    func notificationWatchers(bytes: [UInt8]) {
+        let notification = TargetNotificationConverter.shared.convert(bytes: bytes)
+        watchers.forEach { $0?.receiveFromTarget(notification: notification) }
     }
 }
 

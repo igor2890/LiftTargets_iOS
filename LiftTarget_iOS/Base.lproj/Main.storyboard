@@ -138,7 +138,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="playButton" destination="FSA-uj-DlT" id="MU5-ju-aGg"/>
-                        <segue destination="Rex-nC-kwc" kind="show" identifier="startGame" id="4Hb-Ui-8e2"/>
+                        <segue destination="Rex-nC-kwc" kind="presentation" identifier="startGame" modalPresentationStyle="fullScreen" id="4Hb-Ui-8e2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLW-z3-Fo5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

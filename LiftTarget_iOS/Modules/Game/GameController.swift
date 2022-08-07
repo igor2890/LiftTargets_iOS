@@ -9,8 +9,8 @@ import UIKit
 
 class GameController: UIViewController {
 
-    var players: [String] = []
-    weak var startVC: BluetoothManager!
+    var game: Game!
+    weak var bluetoothManager: BluetoothManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,13 +18,17 @@ class GameController: UIViewController {
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         
-        startVC.subscibe(watcher: self)
+        bluetoothManager.subscibe(watcher: self)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscape }
     
     override var shouldAutorotate: Bool {
-        return false
+        return true
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .landscapeLeft
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,8 +43,7 @@ class GameController: UIViewController {
 }
 
 extension GameController: BluetoothWatcher {
-    func receiveFromPeripheral(bytes: [UInt8]) {
-        print("incoming bytes received")
+    func receiveFromTarget(notification: TargetNotification) {
+        print(notification.description)
     }
-    
 }

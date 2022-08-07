@@ -320,6 +320,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
             return
         }
         showMessage(message: incomingText + text)
+        notificationWatchers(bytes: array)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
