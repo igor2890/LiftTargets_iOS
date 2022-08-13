@@ -32,12 +32,13 @@ class TargetNotificationConverter {
             (UInt32(array[2]) << 8) +
             UInt32(array[3])
         let targetStates: [Bool] = [
-            array[4] << 4 & 1 == 1,
-            array[4] << 3 & 1 == 1,
-            array[4] << 2 & 1 == 1,
-            array[4] << 1 & 1 == 1,
+            array[4] >> 4 & 1 == 1,
+            array[4] >> 3 & 1 == 1,
+            array[4] >> 2 & 1 == 1,
+            array[4] >> 1 & 1 == 1,
             array[4] & 1 == 1,
         ]
+        
         let voltage = Double(array[5]) / 10
         
         return TargetNotification(

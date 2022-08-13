@@ -138,28 +138,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="playButton" destination="FSA-uj-DlT" id="MU5-ju-aGg"/>
-                        <segue destination="Rex-nC-kwc" kind="presentation" identifier="startGame" modalPresentationStyle="fullScreen" id="4Hb-Ui-8e2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLW-z3-Fo5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1652" y="388"/>
-        </scene>
-        <!--Game Controller-->
-        <scene sceneID="Ul1-GU-2gR">
-            <objects>
-                <viewController id="Rex-nC-kwc" customClass="GameController" customModule="LiftTarget_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cbn-DH-whz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="3PX-SW-6uh"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="F7P-Vs-NJR"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="unQ-RS-i7z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2471" y="388"/>
         </scene>
         <!--Search Controller-->
         <scene sceneID="4Kc-zd-8ut">

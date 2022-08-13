@@ -149,7 +149,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
                 return
             }
             let array = [UInt8](data)
-            print(array.description)
+//            print(array.description)
             
             showMessage(message: outputText + finalText)
 

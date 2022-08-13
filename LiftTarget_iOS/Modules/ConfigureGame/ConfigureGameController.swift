@@ -121,14 +121,12 @@ class ConfigureGameController: UITableViewController {
     }
 
     @IBAction func playTapped(_ sender: Any) {
-        performSegue(withIdentifier: "startGame", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let gameVC = segue.destination as? GameController else { return }
+        let gameVC = GameController(nibName: "GameController", bundle: nil)
+        gameVC.modalPresentationStyle = .fullScreen
         let players = playersNames.map { Player(name: $0) }
         gameVC.game = Game(players: players, shootsPerSession: 5, roundsCount: 5)
         gameVC.bluetoothManager = startVC
+        present(gameVC, animated: true)
     }
 
 }
