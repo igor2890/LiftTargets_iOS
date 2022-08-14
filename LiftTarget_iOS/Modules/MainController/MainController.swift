@@ -1,5 +1,5 @@
 //
-//  StartController.swift
+//  MainController.swift
 //  LiftTarget_iOS
 //
 //  Created by Игорь Андрианов on 02.07.2022.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreBluetooth
 
-class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate {
+class MainController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate {
     //MARK: Properties
 
     @IBOutlet weak var scanButton: UIButton!
@@ -62,6 +62,7 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
         disconnectButton.isEnabled = false
         //TODO: TEST!!! CHANGE TO FALSE WHEN REAL USE
         playButton.isEnabled = true
+        //___________________________________________
         statusView.clipsToBounds = true
         statusView.layer.cornerRadius = statusView.frame.height / 2
         statusView.backgroundColor = .systemRed
@@ -97,10 +98,10 @@ class StartController: UIViewController, CBCentralManagerDelegate, CBPeripheralD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let searchVC = segue.destination as? SearchController
         {
-            searchVC.startVC = self as StartControllerProtocol
+            searchVC.mainVC = self as MainControllerProtocol
             self.searchVC = searchVC
         } else if let configVC = segue.destination as? ConfigureGameController {
-            configVC.startVC = self as BluetoothManager
+            configVC.mainVC = self as BluetoothManager
         }
     }
     

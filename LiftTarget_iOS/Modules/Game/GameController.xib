@@ -10,10 +10,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameController" customModule="LiftTarget_iOS" customModuleProvider="target">
             <connections>
-                <outlet property="currentPlayerNameLabel" destination="TVT-qQ-Try" id="YBe-gK-N9q"/>
+                <outlet property="currentNameLabel" destination="TVT-qQ-Try" id="YBe-gK-N9q"/>
+                <outlet property="currentTimeLabel" destination="YFg-7y-VZk" id="fOZ-Uy-Xps"/>
+                <outlet property="greenButton" destination="d2n-Z7-jVK" id="Ite-ar-lv4"/>
                 <outlet property="playersTableView" destination="iVQ-MG-YzJ" id="Bwg-vr-ihB"/>
+                <outlet property="redButton" destination="him-xE-e2z" id="6ne-9H-Shs"/>
                 <outlet property="targetsView" destination="wWs-qa-ZLa" id="Thq-ZD-5x9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yellowButton" destination="x86-dU-JnU" id="JoD-R7-Jaq"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

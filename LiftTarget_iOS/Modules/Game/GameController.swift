@@ -8,9 +8,16 @@
 import UIKit
 
 class GameController: UIViewController {
-    @IBOutlet weak var currentPlayerNameLabel: UILabel!
-    @IBOutlet weak var playersTableView: UITableView!
+    @IBOutlet weak var currentNameLabel: UILabel!
+    @IBOutlet weak var currentTimeLabel: UILabel!
+    
     @IBOutlet weak var targetsView: TargetsView!
+    
+    @IBOutlet weak var greenButton: UIButton!
+    @IBOutlet weak var yellowButton: UIButton!
+    @IBOutlet weak var redButton: UIButton!
+    
+    @IBOutlet weak var playersTableView: UITableView!
     
     var game: Game!
     weak var bluetoothManager: BluetoothManager!
@@ -26,10 +33,11 @@ class GameController: UIViewController {
             UINib(nibName: "PlayerCell", bundle: nil),
             forCellReuseIdentifier: "playerCell")
         
-        //TODO: перенести в didSet
-        currentPlayerNameLabel.text = game.currentPlayer?.name
+        setTimer(time: 0.0)
         
         bluetoothManager.subscibe(watcher: self)
+        
+        game.configure()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscape }
@@ -52,6 +60,20 @@ class GameController: UIViewController {
         super.viewDidDisappear(animated)
         UIApplication.shared.isIdleTimerDisabled = false
     }
+    
+    func setTimer(time: Double) {
+        
+    }
+    
+    func startTimer() {
+        
+    }
+    
+    func stopTimer() {
+        
+    }
+    
+    
 }
 
 extension GameController: BluetoothWatcher {

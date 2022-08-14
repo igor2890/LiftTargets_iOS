@@ -8,7 +8,7 @@
 import UIKit
 import CoreBluetooth
 
-protocol StartControllerProtocol: AnyObject {
+protocol MainControllerProtocol: AnyObject {
     func stopScan()
     func startScan()
     func connect(peripheralAt index: Int)
@@ -25,7 +25,7 @@ protocol BluetoothWatcher: AnyObject {
     func receiveError(msg: String)
 }
 
-extension StartController: StartControllerProtocol {
+extension MainController: MainControllerProtocol {
     func startScan() {
         centralBluetoothManager.scanForPeripherals(
             withServices: [CBUUID(string: "FFE0")],
@@ -42,7 +42,7 @@ extension StartController: StartControllerProtocol {
     }
 }
 
-extension StartController: BluetoothManager {    
+extension MainController: BluetoothManager {    
     func subscibe(watcher: BluetoothWatcher) {
         watchers = watchers.filter { $0 != nil }
         weak var newWatcher = watcher

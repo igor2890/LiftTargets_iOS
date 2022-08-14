@@ -44,7 +44,7 @@ class ConfigureGameController: UITableViewController {
             tableView.reloadSections(IndexSet(integer: 0), with: .none)
         }
     }
-    weak var startVC: BluetoothManager!
+    weak var mainVC: BluetoothManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,8 +160,8 @@ class ConfigureGameController: UITableViewController {
         let gameVC = GameController(nibName: "GameController", bundle: nil)
         gameVC.modalPresentationStyle = .fullScreen
         let players = playersNames.map { Player(name: $0) }
-        gameVC.game = Game(players: players, settings: settings)
-        gameVC.bluetoothManager = startVC
+        gameVC.game = Game(gameVC: gameVC, players: players, settings: settings)
+        gameVC.bluetoothManager = mainVC
         present(gameVC, animated: true)
     }
 

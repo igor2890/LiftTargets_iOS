@@ -14,16 +14,16 @@ class SearchController: UITableViewController {
             tableView.reloadData()
         }
     }
-    var startVC: StartControllerProtocol!
+    var mainVC: MainControllerProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.largeContentTitle = "Devices"
-        startVC.startScan()
+        mainVC.startScan()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        startVC.stopScan()
+        mainVC.stopScan()
     }
 
     // MARK: - Table view data source
@@ -45,7 +45,7 @@ class SearchController: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         if indexPath.section == 1 {
-            startVC.connect(peripheralAt: indexPath.row)
+            mainVC.connect(peripheralAt: indexPath.row)
             navigationController?.popViewController(animated: true)
         }
     }
