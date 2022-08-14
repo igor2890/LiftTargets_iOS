@@ -34,16 +34,22 @@ struct Player {
 class Game {
     let id = UUID()
     let players: [Player]
-    let shootsPerSession: Int
-    let roundsCount: Int
+    private(set) var shootsPerSession: Int = 0
+    private(set) var roundsPerSession: Int = 0
     
     var currentRound: Int = 0
     var currentPlayer: Player?
     
-    init(players: [Player], shootsPerSession: Int, roundsCount: Int) {
+    init(players: [Player], settings: [Setting]) {
         self.players = players
-        self.shootsPerSession = shootsPerSession
-        self.roundsCount = roundsCount
+        if let roundCountSetting = settings.first(where: { $0.type == .rounds }) {
+            self.roundsPerSession = roundCountSetting.values[roundCountSetting.selectedIndex]
+        }
+
+        if let shootsCountSession = settings.first(where: { $0.type == .shoots }) {
+            self.shootsPerSession = shootsCountSession.values[shootsCountSession.selectedIndex]
+        }
+        
         self.currentPlayer = self.players.first
     }
 }

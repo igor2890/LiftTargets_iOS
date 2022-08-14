@@ -7,23 +7,49 @@
 
 import UIKit
 
-class ConfigureGameController: UITableViewController {
+enum SettingType {
+    case rounds
+    case shoots
+}
 
+struct Setting {
+    let type: SettingType
+    let name: String
+    let values: [Int]
+    var selectedIndex: Int
+}
+
+class ConfigureGameController: UITableViewController {
+    
     @IBOutlet weak var playButton: UIBarButtonItem!
+    
+    var settings = [
+        Setting(
+            type: .rounds,
+            name: "Rounds per game:",
+            values: [1,2,3,4,5,],
+            selectedIndex: 2),
+        Setting(
+            type: .shoots,
+            name: "Shoots per round:",
+            values: [5,6,7,8,],
+            selectedIndex: 0),
+    ]
+    
+    
     
     private var playersNames: [String] = [] {
         didSet {
             playButton.isEnabled = playersNames.count == 0 ? false : true
-            tableView.reloadData()
+            tableView.reloadSections(IndexSet(integer: 0), with: .none)
         }
     }
-    private var settings: [String] = ["hi","ho","ha","he"]
     weak var startVC: BluetoothManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playButton.isEnabled = false
-
+        tableView.sectionHeaderTopPadding = 0.0
     }
 
     // MARK: - Table view data source
@@ -42,7 +68,7 @@ class ConfigureGameController: UITableViewController {
                 return count+1
             }
         }
-        return settings.count
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -53,22 +79,32 @@ class ConfigureGameController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        var config = cell.defaultContentConfiguration()
         switch indexPath.section {
         case 0:
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            var config = cell.defaultContentConfiguration()
             if playersNames.count == indexPath.row {
                 config.text = "+"
             } else {
                 config.text = playersNames[indexPath.row]
                 cell.backgroundColor = UIColor(white: 0.4, alpha: 0.4)
             }
+            config.textProperties.alignment = .center
+            cell.contentConfiguration = config
+            return cell
         default:
-            config.text = settings[indexPath.row]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "settingCell") as? SettingCell
+            else { return UITableViewCell() }
+            let setting = settings[indexPath.row]
+            cell.configure(setting: setting)
+            cell.countSegmentedControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
+            cell.countSegmentedControl.tag = indexPath.row
+            return cell
         }
-        config.textProperties.alignment = .center
-        cell.contentConfiguration = config
-        return cell
+    }
+    
+    @objc func segmentValueChanged(_ sender: UISegmentedControl) {
+        settings[sender.tag].selectedIndex = sender.selectedSegmentIndex
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -106,7 +142,7 @@ class ConfigureGameController: UITableViewController {
                 present(alert, animated: true)
             }
         default:
-            print(settings[indexPath.row])
+            break
         }
     }
     
@@ -124,7 +160,7 @@ class ConfigureGameController: UITableViewController {
         let gameVC = GameController(nibName: "GameController", bundle: nil)
         gameVC.modalPresentationStyle = .fullScreen
         let players = playersNames.map { Player(name: $0) }
-        gameVC.game = Game(players: players, shootsPerSession: 5, roundsCount: 5)
+        gameVC.game = Game(players: players, settings: settings)
         gameVC.bluetoothManager = startVC
         present(gameVC, animated: true)
     }

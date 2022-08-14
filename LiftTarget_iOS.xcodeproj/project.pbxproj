@@ -22,6 +22,7 @@
 		40A8FA0728704A00000BCFF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A8FA0528704A00000BCFF6 /* LaunchScreen.storyboard */; };
 		40A8FA0F28704E69000BCFF6 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8FA0E28704E69000BCFF6 /* SearchController.swift */; };
 		40AE684D28A8C80800717AA4 /* UIVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE684C28A8C80800717AA4 /* UIVC+Ext.swift */; };
+		40AE684F28A8F1CD00717AA4 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE684E28A8F1CD00717AA4 /* SettingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		40A8FA0828704A00000BCFF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = LiftTarget_iOS/Environments/Info.plist; sourceTree = SOURCE_ROOT; };
 		40A8FA0E28704E69000BCFF6 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		40AE684C28A8C80800717AA4 /* UIVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVC+Ext.swift"; sourceTree = "<group>"; };
+		40AE684E28A8F1CD00717AA4 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				402223C5289B039800859817 /* ConfigureGameController.swift */,
 				402223D4289F0EAE00859817 /* Game.swift */,
+				40AE684E28A8F1CD00717AA4 /* SettingCell.swift */,
 			);
 			path = ConfigureGame;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				40A8F9FF287049FF000BCFF6 /* StartController.swift in Sources */,
 				40AE684D28A8C80800717AA4 /* UIVC+Ext.swift in Sources */,
 				402223DB289FA92600859817 /* GameController.swift in Sources */,
+				40AE684F28A8F1CD00717AA4 /* SettingCell.swift in Sources */,
 				402223D5289F0EAE00859817 /* Game.swift in Sources */,
 				40A8F9FB287049FF000BCFF6 /* AppDelegate.swift in Sources */,
 				40A8F9FD287049FF000BCFF6 /* SceneDelegate.swift in Sources */,

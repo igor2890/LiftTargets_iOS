@@ -121,21 +121,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roundsSetting" id="zjE-mp-Qu1">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="settingCell" id="zjE-mp-Qu1" customClass="SettingCell" customModule="LiftTarget_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zjE-mp-Qu1" id="3sm-uX-iHt">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rounds per game:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v00-Go-8Vj">
-                                            <rect key="frame" x="20" y="11.5" width="139" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v00-Go-8Vj">
+                                            <rect key="frame" x="20" y="11.5" width="36.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="McM-7l-56M">
-                                            <rect key="frame" x="165" y="6.5" width="243" height="32"/>
+                                            <rect key="frame" x="62.5" y="6.5" width="331.5" height="32"/>
                                             <segments>
                                                 <segment title="First"/>
                                                 <segment title="Second"/>
@@ -145,41 +145,15 @@
                                     <constraints>
                                         <constraint firstItem="v00-Go-8Vj" firstAttribute="leading" secondItem="3sm-uX-iHt" secondAttribute="leading" constant="20" symbolic="YES" id="9P4-N5-5C4"/>
                                         <constraint firstItem="v00-Go-8Vj" firstAttribute="centerY" secondItem="3sm-uX-iHt" secondAttribute="centerY" id="Np4-c4-EcG"/>
-                                        <constraint firstAttribute="trailing" secondItem="McM-7l-56M" secondAttribute="trailing" constant="6" id="Om0-lY-rfH"/>
+                                        <constraint firstAttribute="trailing" secondItem="McM-7l-56M" secondAttribute="trailing" constant="20" id="Om0-lY-rfH"/>
                                         <constraint firstItem="McM-7l-56M" firstAttribute="centerY" secondItem="3sm-uX-iHt" secondAttribute="centerY" id="lc6-Jr-ZqQ"/>
                                         <constraint firstItem="McM-7l-56M" firstAttribute="leading" secondItem="v00-Go-8Vj" secondAttribute="trailing" constant="6" id="sHC-2A-hdh"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="shootsSetting" id="a3M-sM-uuW">
-                                <rect key="frame" x="0.0" y="88" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a3M-sM-uuW" id="0MQ-ct-g7E">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shoots per round:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgf-CK-nAN">
-                                            <rect key="frame" x="20" y="11.5" width="136.5" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XQV-w5-wEq">
-                                            <rect key="frame" x="162.5" y="6.5" width="245.5" height="32"/>
-                                            <segments>
-                                                <segment title="First"/>
-                                                <segment title="Second"/>
-                                            </segments>
-                                        </segmentedControl>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="XQV-w5-wEq" secondAttribute="trailing" constant="6" id="JdY-IR-ofx"/>
-                                        <constraint firstItem="Mgf-CK-nAN" firstAttribute="leading" secondItem="0MQ-ct-g7E" secondAttribute="leading" constant="20" symbolic="YES" id="fIf-3s-NIe"/>
-                                        <constraint firstItem="Mgf-CK-nAN" firstAttribute="centerY" secondItem="0MQ-ct-g7E" secondAttribute="centerY" id="jPC-Q7-wPh"/>
-                                        <constraint firstItem="XQV-w5-wEq" firstAttribute="leading" secondItem="Mgf-CK-nAN" secondAttribute="trailing" constant="6" id="tn2-Nm-R7g"/>
-                                        <constraint firstItem="XQV-w5-wEq" firstAttribute="centerY" secondItem="0MQ-ct-g7E" secondAttribute="centerY" id="v3t-T2-CYn"/>
-                                    </constraints>
-                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="countSegmentedControl" destination="McM-7l-56M" id="bX0-DP-jOE"/>
+                                    <outlet property="settingLabel" destination="v00-Go-8Vj" id="sxH-Je-a4g"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
