@@ -43,14 +43,83 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qP4-Pr-UBb">
                     <rect key="frame" x="64" y="285" width="525.5" height="108"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2n-Z7-jVK">
+                            <rect key="frame" x="35.5" y="21.5" width="131.5" height="65"/>
+                            <color key="backgroundColor" systemColor="systemGreenColor"/>
+                            <color key="tintColor" systemColor="systemBackgroundColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="tinted">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Start">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="Helvetica"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </buttonConfiguration>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="him-xE-e2z">
+                            <rect key="frame" x="358.5" y="21.5" width="131.5" height="65"/>
+                            <color key="backgroundColor" red="1" green="0.37606389829999998" blue="0.28271161220000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" systemColor="systemBackgroundColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="tinted">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Stop">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="Helvetica"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </buttonConfiguration>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x86-dU-JnU">
+                            <rect key="frame" x="197" y="21.5" width="131.5" height="65"/>
+                            <color key="backgroundColor" red="1" green="0.99983765130000002" blue="0.42156848149999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" systemColor="systemBackgroundColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="tinted">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Pause">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="24" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </buttonConfiguration>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" systemColor="systemGray6Color"/>
+                    <constraints>
+                        <constraint firstItem="d2n-Z7-jVK" firstAttribute="height" secondItem="x86-dU-JnU" secondAttribute="height" id="1tw-Pk-lvy"/>
+                        <constraint firstItem="x86-dU-JnU" firstAttribute="width" secondItem="qP4-Pr-UBb" secondAttribute="width" multiplier="0.25" id="8Wc-g0-YS5"/>
+                        <constraint firstItem="d2n-Z7-jVK" firstAttribute="centerY" secondItem="qP4-Pr-UBb" secondAttribute="centerY" id="EjT-qV-eXM"/>
+                        <constraint firstItem="x86-dU-JnU" firstAttribute="centerY" secondItem="qP4-Pr-UBb" secondAttribute="centerY" id="Gtz-Gn-BNH"/>
+                        <constraint firstItem="him-xE-e2z" firstAttribute="centerY" secondItem="qP4-Pr-UBb" secondAttribute="centerY" id="Iho-Rs-XV1"/>
+                        <constraint firstItem="him-xE-e2z" firstAttribute="width" secondItem="x86-dU-JnU" secondAttribute="width" id="NXr-CH-va2"/>
+                        <constraint firstItem="him-xE-e2z" firstAttribute="height" secondItem="x86-dU-JnU" secondAttribute="height" id="OQd-GF-1Cu"/>
+                        <constraint firstItem="x86-dU-JnU" firstAttribute="leading" secondItem="d2n-Z7-jVK" secondAttribute="trailing" constant="30" id="TIH-US-c2O"/>
+                        <constraint firstItem="him-xE-e2z" firstAttribute="leading" secondItem="x86-dU-JnU" secondAttribute="trailing" constant="30" id="XTf-Vg-VRX"/>
+                        <constraint firstItem="d2n-Z7-jVK" firstAttribute="width" secondItem="x86-dU-JnU" secondAttribute="width" id="YUe-Cl-JmB"/>
+                        <constraint firstItem="x86-dU-JnU" firstAttribute="height" secondItem="qP4-Pr-UBb" secondAttribute="height" multiplier="0.6" id="lxU-Gf-RUK"/>
+                        <constraint firstItem="x86-dU-JnU" firstAttribute="centerX" secondItem="qP4-Pr-UBb" secondAttribute="centerX" id="nAl-i1-vr3"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ncV-U6-kt1">
                     <rect key="frame" x="64" y="20" width="525.5" height="88"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TVT-qQ-Try">
-                            <rect key="frame" x="20" y="4.5" width="263" height="79"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TVT-qQ-Try">
+                            <rect key="frame" x="20" y="4.5" width="315.5" height="79"/>
                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFg-7y-VZk">
+                            <rect key="frame" x="379" y="26" width="105" height="36"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -58,8 +127,11 @@
                     <color key="backgroundColor" systemColor="systemGray6Color"/>
                     <constraints>
                         <constraint firstItem="TVT-qQ-Try" firstAttribute="leading" secondItem="ncV-U6-kt1" secondAttribute="leading" constant="20" id="8yV-C6-63F"/>
+                        <constraint firstItem="YFg-7y-VZk" firstAttribute="centerY" secondItem="ncV-U6-kt1" secondAttribute="centerY" id="YZH-V4-Ve6"/>
+                        <constraint firstAttribute="trailing" secondItem="YFg-7y-VZk" secondAttribute="trailing" constant="41.5" id="dUD-dj-1rf"/>
+                        <constraint firstItem="YFg-7y-VZk" firstAttribute="width" secondItem="ncV-U6-kt1" secondAttribute="width" multiplier="0.2" id="gpB-Fd-0J5"/>
                         <constraint firstItem="TVT-qQ-Try" firstAttribute="centerY" secondItem="ncV-U6-kt1" secondAttribute="centerY" id="gtj-Db-93u"/>
-                        <constraint firstItem="TVT-qQ-Try" firstAttribute="width" secondItem="ncV-U6-kt1" secondAttribute="width" multiplier="0.5" id="jvo-Tg-ndi"/>
+                        <constraint firstItem="TVT-qQ-Try" firstAttribute="width" secondItem="ncV-U6-kt1" secondAttribute="width" multiplier="0.6" id="jvo-Tg-ndi"/>
                         <constraint firstItem="TVT-qQ-Try" firstAttribute="height" secondItem="ncV-U6-kt1" secondAttribute="height" multiplier="0.9" id="xvc-Lx-wjA"/>
                     </constraints>
                 </view>
@@ -96,6 +168,9 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

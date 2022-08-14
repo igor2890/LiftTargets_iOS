@@ -22,11 +22,14 @@ class GameController: UIViewController {
         playersTableView.delegate = self
         playersTableView.dataSource = self
         playersTableView.isScrollEnabled = false
+        playersTableView.register(
+            UINib(nibName: "PlayerCell", bundle: nil),
+            forCellReuseIdentifier: "playerCell")
         
+        //TODO: перенести в didSet
         currentPlayerNameLabel.text = game.currentPlayer?.name
         
         bluetoothManager.subscibe(watcher: self)
-        
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscape }
@@ -73,10 +76,10 @@ extension GameController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        var config = cell.defaultContentConfiguration()
-        config.text = game.players[indexPath.row].name
-        cell.contentConfiguration = config
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell") as? PlayerCell
+        else { return UITableViewCell() }
+        let player = game.players[indexPath.row]
+        cell.configure(player: player)
         cell.selectionStyle = .none
         return cell
     }

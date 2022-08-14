@@ -15,6 +15,16 @@ struct Session {
 
 struct Player {
     let name: String
+    var totalShoots: Int {
+        sessions
+            .map { $0.shoots }
+            .reduce(0, +)
+    }
+    var totalHits: Int {
+        sessions
+            .map { $0.hits }
+            .reduce(0, +)
+    }
     
     private var sessions: [Session] = []
     
