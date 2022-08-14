@@ -56,6 +56,10 @@ extension GameController: BluetoothWatcher {
         targetsView.setTargets(targetStates: notification.targetStates)
         print(notification.timeStamp)
     }
+    
+    func receiveError(msg: String) {
+        print(msg)
+    }
 }
 
 extension GameController: UITableViewDelegate, UITableViewDataSource {

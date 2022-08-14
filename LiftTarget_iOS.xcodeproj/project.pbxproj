@@ -21,6 +21,7 @@
 		40A8FA0428704A00000BCFF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40A8FA0328704A00000BCFF6 /* Assets.xcassets */; };
 		40A8FA0728704A00000BCFF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A8FA0528704A00000BCFF6 /* LaunchScreen.storyboard */; };
 		40A8FA0F28704E69000BCFF6 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8FA0E28704E69000BCFF6 /* SearchController.swift */; };
+		40AE684D28A8C80800717AA4 /* UIVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE684C28A8C80800717AA4 /* UIVC+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		40A8FA0628704A00000BCFF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40A8FA0828704A00000BCFF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = LiftTarget_iOS/Environments/Info.plist; sourceTree = SOURCE_ROOT; };
 		40A8FA0E28704E69000BCFF6 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		40AE684C28A8C80800717AA4 /* UIVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVC+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				40AE684A28A8188800717AA4 /* App */,
+				40AE684B28A8C7E000717AA4 /* Core */,
 				402223DF28A816EB00859817 /* Environments */,
 				402223CF289F016400859817 /* Services */,
 				402223D6289FA68E00859817 /* Modules */,
@@ -153,6 +156,14 @@
 				40A8F9FC287049FF000BCFF6 /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		40AE684B28A8C7E000717AA4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				40AE684C28A8C80800717AA4 /* UIVC+Ext.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40A8F9FF287049FF000BCFF6 /* StartController.swift in Sources */,
+				40AE684D28A8C80800717AA4 /* UIVC+Ext.swift in Sources */,
 				402223DB289FA92600859817 /* GameController.swift in Sources */,
 				402223D5289F0EAE00859817 /* Game.swift in Sources */,
 				40A8F9FB287049FF000BCFF6 /* AppDelegate.swift in Sources */,

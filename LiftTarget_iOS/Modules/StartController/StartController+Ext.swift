@@ -14,13 +14,15 @@ protocol StartControllerProtocol: AnyObject {
     func connect(peripheralAt index: Int)
 }
 
-protocol BluetoothWatcher: AnyObject {
-    func receiveFromTarget(notification: TargetNotification)
-}
-
 protocol BluetoothManager: AnyObject {
     func subscibe(watcher: BluetoothWatcher)
+    func sendMessageToPeripheral(msg: String)
     func notificationWatchers(bytes: [UInt8])
+}
+
+protocol BluetoothWatcher: AnyObject {
+    func receiveFromTarget(notification: TargetNotification)
+    func receiveError(msg: String)
 }
 
 extension StartController: StartControllerProtocol {
@@ -50,6 +52,15 @@ extension StartController: BluetoothManager {
     func notificationWatchers(bytes: [UInt8]) {
         let notification = TargetNotificationConverter.shared.convert(bytes: bytes)
         watchers.forEach { $0?.receiveFromTarget(notification: notification) }
+    }
+    
+    func sendMessageToPeripheral(msg: String) {
+        guard msg != "" else { return }
+        let finalText = msg + "\0"
+        guard let chatacteristic = myCharactericric,
+              let data = (finalText.data(using: .ascii))
+        else { return }
+        myPeripheral?.writeValue(data , for: chatacteristic, type: .withResponse)
     }
 }
 
