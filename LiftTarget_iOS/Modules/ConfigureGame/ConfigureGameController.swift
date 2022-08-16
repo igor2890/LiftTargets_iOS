@@ -36,12 +36,11 @@ class ConfigureGameController: UITableViewController {
             selectedIndex: 0),
     ]
     
-    
+    var playersLimit = 4
     
     private var playersNames: [String] = [] {
         didSet {
             playButton.isEnabled = playersNames.count == 0 ? false : true
-            tableView.reloadSections(IndexSet(integer: 0), with: .none)
         }
     }
     weak var mainVC: BluetoothManager!
@@ -60,13 +59,7 @@ class ConfigureGameController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            let count = playersNames.count
-            switch count {
-            case 4:
-                return 4
-            default:
-                return count+1
-            }
+            return playersNames.count + 1
         }
         return 2
     }
@@ -87,7 +80,7 @@ class ConfigureGameController: UITableViewController {
                 config.text = "+"
             } else {
                 config.text = playersNames[indexPath.row]
-                cell.backgroundColor = UIColor(white: 0.4, alpha: 0.4)
+                cell.backgroundColor = UIColor(white: 0.8, alpha: 1)
             }
             config.textProperties.alignment = .center
             cell.contentConfiguration = config
@@ -121,7 +114,8 @@ class ConfigureGameController: UITableViewController {
         }
         switch indexPath.section {
         case 0:
-            if indexPath.row == playersNames.count {
+            if indexPath.row == playersNames.count,
+               playersNames.count < playersLimit {
                 let alert = UIAlertController(title: "Add player", message: "Enter the player name", preferredStyle: .alert)
                 alert.addTextField() { textField in
                     textField.autocorrectionType = .no
@@ -135,6 +129,8 @@ class ConfigureGameController: UITableViewController {
                           text != ""
                     else { return }
                     self.playersNames.append(text)
+                    tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                    //TODO: this
                 }
                 let canselAction = UIAlertAction(title: "Cancel", style: .cancel)
                 alert.addAction(addAction)
@@ -152,6 +148,7 @@ class ConfigureGameController: UITableViewController {
         }
         let delAction = UIContextualAction(style: .destructive, title: "Delete"){ _,_,_ in
             self.playersNames.remove(at: indexPath.row)
+            tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
         }
         return UISwipeActionsConfiguration(actions: [delAction])
     }
