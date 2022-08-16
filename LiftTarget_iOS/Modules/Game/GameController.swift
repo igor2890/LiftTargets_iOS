@@ -9,7 +9,7 @@ import UIKit
 
 class GameController: UIViewController {
     @IBOutlet weak var currentNameLabel: UILabel!
-    @IBOutlet weak var currentTimeLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var targetsView: TargetsView!
     
@@ -22,6 +22,10 @@ class GameController: UIViewController {
     var game: Game!
     weak var bluetoothManager: BluetoothManager!
     
+    var timer: Timer?
+    var timerCount: Double = 0.0
+    var timerInterval = 0.1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
@@ -32,8 +36,6 @@ class GameController: UIViewController {
         playersTableView.register(
             UINib(nibName: "PlayerCell", bundle: nil),
             forCellReuseIdentifier: "playerCell")
-        
-        setTimer(time: 0.0)
         
         bluetoothManager.subscibe(watcher: self)
         
@@ -62,19 +64,48 @@ class GameController: UIViewController {
     }
     
     func setTimer(time: Double) {
-        
+        timerCount = time
+        timerLabel.text = String(format: "%.1f", timerCount)
     }
     
     func startTimer() {
-        
+        if timer == nil {
+            timer = Timer.scheduledTimer(
+                timeInterval: timerInterval,
+                target: self,
+                selector: #selector(timerFires),
+                userInfo: nil,
+                repeats: true
+            )
+        }
     }
     
     func stopTimer() {
-        
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc
+    func timerFires() {
+        setTimer(time: timerCount + timerInterval)
+    }
+    
+    @IBAction func greenButtonTapped(_ sender: Any) {
+        game.state.greenButtonTapped()
+    }
+    @IBAction func yellowButtonTapped(_ sender: Any) {
+        game.state.yellowButtonTapped()
+    }
+    @IBAction func redButtonTapped(_ sender: Any) {
+        game.state.redButtonTapped()
     }
     
     
 }
+
+
+
+
 
 extension GameController: BluetoothWatcher {
     func receiveFromTarget(notification: TargetNotification) {

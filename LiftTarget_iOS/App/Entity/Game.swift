@@ -9,7 +9,7 @@ import Foundation
 
 class Game {
     weak var gameVC: GameController!
-    private var state: AbstractGameState!
+    private(set) var state: AbstractGameState!
     
     let id = UUID()
     let players: [Player]
@@ -39,26 +39,30 @@ class Game {
     }
     
     func start() {
-        
+        gameVC.startTimer()
     }
     
     func pause() {
-        
+        gameVC.stopTimer()
     }
     
     func resume() {
-        
+        gameVC.startTimer()
     }
     
     func next() {
-        
+        gameVC.stopTimer()
+        gameVC.setTimer(time: 0.0)
+        gameVC.startTimer()
     }
     
     func stop() {
-        
+        gameVC.stopTimer()
+        gameVC.setTimer(time: 0.0)
     }
     
     func exit() {
-        
+        gameVC.stopTimer()
+        gameVC.setTimer(time: 0.0)
     }
 }

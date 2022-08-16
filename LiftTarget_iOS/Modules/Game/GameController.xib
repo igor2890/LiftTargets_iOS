@@ -11,11 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameController" customModule="LiftTarget_iOS" customModuleProvider="target">
             <connections>
                 <outlet property="currentNameLabel" destination="TVT-qQ-Try" id="YBe-gK-N9q"/>
-                <outlet property="currentTimeLabel" destination="YFg-7y-VZk" id="fOZ-Uy-Xps"/>
                 <outlet property="greenButton" destination="d2n-Z7-jVK" id="Ite-ar-lv4"/>
                 <outlet property="playersTableView" destination="iVQ-MG-YzJ" id="Bwg-vr-ihB"/>
                 <outlet property="redButton" destination="him-xE-e2z" id="6ne-9H-Shs"/>
                 <outlet property="targetsView" destination="wWs-qa-ZLa" id="Thq-ZD-5x9"/>
+                <outlet property="timerLabel" destination="YFg-7y-VZk" id="fOZ-Uy-Xps"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="yellowButton" destination="x86-dU-JnU" id="JoD-R7-Jaq"/>
             </connections>
@@ -62,6 +62,9 @@
                                     </fragment>
                                 </attributedString>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="greenButtonTapped:" destination="-1" eventType="touchUpInside" id="aAC-DS-JgM"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="him-xE-e2z">
                             <rect key="frame" x="358.5" y="21.5" width="131.5" height="65"/>
@@ -77,6 +80,9 @@
                                     </fragment>
                                 </attributedString>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="redButtonTapped:" destination="-1" eventType="touchUpInside" id="5wp-c8-BEH"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x86-dU-JnU">
                             <rect key="frame" x="197" y="21.5" width="131.5" height="65"/>
@@ -94,6 +100,9 @@
                                     </fragment>
                                 </attributedString>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="yellowButtonTapped:" destination="-1" eventType="touchUpInside" id="01i-5K-tn9"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemGray6Color"/>

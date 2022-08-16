@@ -19,6 +19,8 @@ class WaitState: AbstractGameState {
     func begin() {
         gameVC.currentNameLabel.text = ""
         gameVC.stopTimer()
+        gameVC.setTimer(time: 0.0)
+        
         
         gameVC.greenButton.setTitle("Start", for: .normal)
         gameVC.greenButton.isEnabled = true
@@ -34,8 +36,9 @@ class WaitState: AbstractGameState {
     }
     
     func yellowButtonTapped() {
+        
     }
-    
+
     func redButtonTapped() {
         game.exit()
     }
