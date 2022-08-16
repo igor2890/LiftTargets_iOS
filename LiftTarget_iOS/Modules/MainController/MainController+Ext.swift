@@ -15,7 +15,8 @@ protocol MainControllerProtocol: AnyObject {
 }
 
 protocol BluetoothManager: AnyObject {
-    func subscibe(watcher: BluetoothWatcher)
+    func subscribe(watcher: BluetoothWatcher)
+    func unsubscribe(watcher: BluetoothWatcher)
     func sendMessageToPeripheral(msg: String)
     func notificationWatchers(bytes: [UInt8])
 }
@@ -42,14 +43,19 @@ extension MainController: MainControllerProtocol {
     }
 }
 
-extension MainController: BluetoothManager {    
-    func subscibe(watcher: BluetoothWatcher) {
+extension MainController: BluetoothManager {
+    func subscribe(watcher: BluetoothWatcher) {
         watchers = watchers.filter { $0 != nil }
         weak var newWatcher = watcher
         watchers.append(newWatcher)
     }
     
+    func unsubscribe(watcher: BluetoothWatcher) {
+        watchers = watchers.filter { $0 !== watcher }
+    }
+    
     func notificationWatchers(bytes: [UInt8]) {
+        watchers = watchers.filter { $0 != nil }
         let notification = TargetNotificationConverter.shared.convert(bytes: bytes)
         watchers.forEach { $0?.receiveFromTarget(notification: notification) }
     }

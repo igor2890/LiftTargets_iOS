@@ -37,8 +37,6 @@ class GameController: UIViewController {
             UINib(nibName: "PlayerCell", bundle: nil),
             forCellReuseIdentifier: "playerCell")
         
-        bluetoothManager.subscibe(watcher: self)
-        
         game.configure()
     }
     
@@ -55,12 +53,13 @@ class GameController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = true
-        playersTableView.reloadData()
+        bluetoothManager.subscribe(watcher: game)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIApplication.shared.isIdleTimerDisabled = false
+        bluetoothManager.unsubscribe(watcher: game)
     }
     
     func setTimer(time: Double) {
@@ -98,23 +97,6 @@ class GameController: UIViewController {
     }
     @IBAction func redButtonTapped(_ sender: Any) {
         game.state.redButtonTapped()
-    }
-    
-    
-}
-
-
-
-
-
-extension GameController: BluetoothWatcher {
-    func receiveFromTarget(notification: TargetNotification) {
-        targetsView.setTargets(targetStates: notification.targetStates)
-        print(notification.timeStamp)
-    }
-    
-    func receiveError(msg: String) {
-        print(msg)
     }
 }
 
