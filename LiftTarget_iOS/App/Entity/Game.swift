@@ -9,7 +9,17 @@ import Foundation
 
 class Game {
     weak var gameVC: GameController!
-    private(set) var state: AbstractGameState!
+    weak var bluetoothManager: BluetoothManager!
+    
+    var state: AbstractGameState! {
+        didSet {
+            state.begin()
+        }
+    }
+    
+    var waitState: WaitState!
+    var shootState: ShootState!
+    var pauseState: PauseState!
     
     var timer: Timer?
     var timerCount = 0.0
@@ -18,13 +28,14 @@ class Game {
     let id = UUID()
     let players: [Player]
 
-    private(set) var shootsPerSession: Int = 0
-    private(set) var roundsPerSession: Int = 0
-    private(set) var timerLimit: Int = 0
+    private var shootsPerSession: Int = 0
+    var roundsPerSession: Int = 0
+    private var timerLimit: Int = 0
     
     var currentRound: Int = 0
     var currentPlayerIndex: Int = 0
     
+    //MARK: Init
     init(gameVC: GameController, players: [Player], settings: [Setting]) {
         self.players = players
         if let roundCountSetting = settings.first(where: { $0.type == .rounds }) {
@@ -43,50 +54,32 @@ class Game {
     }
     
     func configure() {
-        state = WaitState(gameVC: gameVC, game: self)
-        state.begin()
+        waitState = WaitState(gameVC: gameVC, game: self)
+        shootState = ShootState(gameVC: gameVC, game: self)
+        pauseState = PauseState(gameVC: gameVC, game: self)
+        state = waitState
     }
     
-    func start() {
-        setTimer(time: 0.0)
-        startTimer()
-        gameVC.isScreenAlwaysOn = true
+    //MARK: Buttons Taps Handlers
+    func greenButtonTapped() {
+        state.greenButtonTapped()
     }
     
-    func pause() {
-        stopTimer()
-        gameVC.isScreenAlwaysOn = false
-    }
-    
-    func resume() {
-        startTimer()
-        gameVC.isScreenAlwaysOn = true
-    }
-    
-    func next() {
-        stopTimer()
-        setTimer(time: 0.0)
-        startTimer()
-    }
-    
-    func stop() {
-        stopTimer()
-        setTimer(time: 0.0)
-        gameVC.isScreenAlwaysOn = false
-    }
-    
-    func exit() {
-        stopTimer()
-        setTimer(time: 0.0)
-        gameVC.isScreenAlwaysOn = false
+    func yellowButtonTapped() {
+        state.yellowButtonTapped()
     }
 
-    private func setTimer(time: Double) {
+    func redButtonTapped() {
+        state.redButtonTapped()
+    }
+
+    //MARK: Timer
+    func setTimer(time: Double) {
         timerCount = time
         gameVC.timerLabel.text = String(format: "%.1f", timerCount)
     }
     
-    private func startTimer() {
+    func startTimer() {
         if timer == nil {
             timer = Timer.scheduledTimer(
                 timeInterval: timerInterval,
@@ -98,7 +91,7 @@ class Game {
         }
     }
     
-    private func stopTimer() {
+    func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
@@ -109,9 +102,10 @@ class Game {
     }
 }
 
+//MARK: BluetoothWatcher
 extension Game: BluetoothWatcher {
     func receiveFromTarget(notification: TargetNotification) {
-        gameVC.targetsView.setTargets(targetStates: notification.targetStates)
+        state.notifReceive(targetNotification: notification)
         print(notification.timeStamp)
     }
     

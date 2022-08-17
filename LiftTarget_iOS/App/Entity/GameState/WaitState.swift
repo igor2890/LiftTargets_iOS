@@ -17,8 +17,14 @@ class WaitState: AbstractGameState {
     }
     
     func begin() {
+        game.currentPlayerIndex = 0
+        game.currentRound = 0
+        
+        game.stopTimer()
+        game.setTimer(time: 0.0)
+        
         gameVC.currentNameLabel.text = ""
-        game.pause()
+        gameVC.isScreenAlwaysOn = false
         
         gameVC.greenButton.setTitle("Start", for: .normal)
         gameVC.greenButton.isEnabled = true
@@ -30,7 +36,7 @@ class WaitState: AbstractGameState {
     }
     
     func greenButtonTapped() {
-        game.start()
+        game.bluetoothManager.sendMessageToPeripheral(msg: "+U")
     }
     
     func yellowButtonTapped() {
@@ -38,6 +44,11 @@ class WaitState: AbstractGameState {
     }
 
     func redButtonTapped() {
-        game.exit()
+        gameVC.dismiss(animated: true)
+    }
+    
+    func notifReceive(targetNotification notif: TargetNotification) {
+        if notif.isAllUp { game.state = game.shootState }
+        gameVC.targetsView.setTargets(targetStates: notif.targetStates)
     }
 }

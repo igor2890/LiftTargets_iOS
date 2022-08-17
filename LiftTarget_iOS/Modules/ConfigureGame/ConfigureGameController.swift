@@ -131,6 +131,7 @@ class ConfigureGameController: UITableViewController {
                           let text = textField.text,
                           text != ""
                     else { return }
+                    if self.playersNames.contains(text) { return }
                     self.playersNames.append(text)
                     tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
                 }

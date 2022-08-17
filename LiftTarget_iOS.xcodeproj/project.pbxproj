@@ -28,7 +28,7 @@
 		40AE685728A935B000717AA4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE685628A935B000717AA4 /* Player.swift */; };
 		40AE685A28A93A5600717AA4 /* AbstractGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE685928A93A5600717AA4 /* AbstractGameState.swift */; };
 		40AE685C28A93AEA00717AA4 /* WaitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE685B28A93AEA00717AA4 /* WaitState.swift */; };
-		40AE686028A93BEC00717AA4 /* ShootingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE685F28A93BEC00717AA4 /* ShootingState.swift */; };
+		40AE686028A93BEC00717AA4 /* ShootState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE685F28A93BEC00717AA4 /* ShootState.swift */; };
 		40AE686228A94E7A00717AA4 /* PauseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE686128A94E7A00717AA4 /* PauseState.swift */; };
 		40AE687028A97C8F00717AA4 /* LiftTarget_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE686F28A97C8F00717AA4 /* LiftTarget_iOSTests.swift */; };
 		40AE687D28A97CCB00717AA4 /* LiftTarget_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE687C28A97CCB00717AA4 /* LiftTarget_iOSUITests.swift */; };
@@ -76,7 +76,7 @@
 		40AE685628A935B000717AA4 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		40AE685928A93A5600717AA4 /* AbstractGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGameState.swift; sourceTree = "<group>"; };
 		40AE685B28A93AEA00717AA4 /* WaitState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitState.swift; sourceTree = "<group>"; };
-		40AE685F28A93BEC00717AA4 /* ShootingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingState.swift; sourceTree = "<group>"; };
+		40AE685F28A93BEC00717AA4 /* ShootState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootState.swift; sourceTree = "<group>"; };
 		40AE686128A94E7A00717AA4 /* PauseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseState.swift; sourceTree = "<group>"; };
 		40AE686D28A97C8F00717AA4 /* LiftTarget_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftTarget_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40AE686F28A97C8F00717AA4 /* LiftTarget_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftTarget_iOSTests.swift; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 			children = (
 				40AE685928A93A5600717AA4 /* AbstractGameState.swift */,
 				40AE685B28A93AEA00717AA4 /* WaitState.swift */,
-				40AE685F28A93BEC00717AA4 /* ShootingState.swift */,
+				40AE685F28A93BEC00717AA4 /* ShootState.swift */,
 				40AE686128A94E7A00717AA4 /* PauseState.swift */,
 			);
 			path = GameState;
@@ -418,7 +418,7 @@
 				40A8F9FF287049FF000BCFF6 /* MainController.swift in Sources */,
 				40AE684D28A8C80800717AA4 /* UIVC+Ext.swift in Sources */,
 				402223DB289FA92600859817 /* GameController.swift in Sources */,
-				40AE686028A93BEC00717AA4 /* ShootingState.swift in Sources */,
+				40AE686028A93BEC00717AA4 /* ShootState.swift in Sources */,
 				40AE684F28A8F1CD00717AA4 /* SettingCell.swift in Sources */,
 				40AE685728A935B000717AA4 /* Player.swift in Sources */,
 				402223D5289F0EAE00859817 /* Game.swift in Sources */,

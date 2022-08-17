@@ -49,6 +49,7 @@ class GameController: UIViewController {
         redButton.layer.cornerRadius = buttonsCornerRadius
         
         game.configure()
+        game.bluetoothManager = bluetoothManager
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscape }
@@ -74,13 +75,13 @@ class GameController: UIViewController {
     //TODO: timer
     
     @IBAction func greenButtonTapped(_ sender: Any) {
-        game.state.greenButtonTapped()
+        game.greenButtonTapped()
     }
     @IBAction func yellowButtonTapped(_ sender: Any) {
-        game.state.yellowButtonTapped()
+        game.yellowButtonTapped()
     }
     @IBAction func redButtonTapped(_ sender: Any) {
-        game.state.redButtonTapped()
+        game.redButtonTapped()
     }
 }
 

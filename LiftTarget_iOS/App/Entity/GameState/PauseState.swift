@@ -19,7 +19,9 @@ class PauseState: AbstractGameState {
     }
     
     func begin() {
-        game.pause()
+        game.stopTimer()
+
+        gameVC.isScreenAlwaysOn = false
         
         gameVC.greenButton.setTitle("Resume", for: .normal)
         gameVC.greenButton.isEnabled = true
@@ -27,17 +29,20 @@ class PauseState: AbstractGameState {
         gameVC.yellowButton.isEnabled = false
         gameVC.redButton.setTitle("Stop", for: .normal)
         gameVC.redButton.isEnabled = true
-        
     }
     
     func greenButtonTapped() {
-        game.resume()
+        game.state = game.shootState
     }
     
     func yellowButtonTapped() {
     }
     
     func redButtonTapped() {
-        game.stop()
+        game.state = game.waitState
+    }
+    
+    func notifReceive(targetNotification notif: TargetNotification) {
+        gameVC.targetsView.setTargets(targetStates: notif.targetStates)
     }
 }

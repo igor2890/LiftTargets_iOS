@@ -15,6 +15,18 @@ struct TargetNotification: CustomStringConvertible {
     let targetStates: [IsDown]
     let voltage: Double
     
+    var isAllUp: Bool {
+        var result = true
+        targetStates.forEach { if $0 {result = false} }
+        return result
+    }
+    
+    var isAllDown: Bool {
+        var result = true
+        targetStates.forEach { if !$0 {result = false} }
+        return result
+    }
+    
     var description: String {
         return "At \(timeStamp) milliseconds targets are \(targetStates) \nBattery voltage is \(voltage)V"
     }
