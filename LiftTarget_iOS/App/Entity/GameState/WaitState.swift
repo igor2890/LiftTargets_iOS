@@ -18,9 +18,7 @@ class WaitState: AbstractGameState {
     
     func begin() {
         gameVC.currentNameLabel.text = ""
-        gameVC.stopTimer()
-        gameVC.setTimer(time: 0.0)
-        
+        game.pause()
         
         gameVC.greenButton.setTitle("Start", for: .normal)
         gameVC.greenButton.isEnabled = true

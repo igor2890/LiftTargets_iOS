@@ -18,8 +18,7 @@ class ShootingState: AbstractGameState {
     
     func begin() {
         gameVC.currentNameLabel.text = game.players[game.currentPlayerIndex].name
-        gameVC.setTimer(time: 0.0)
-        gameVC.startTimer()
+        game.start()
         
         gameVC.greenButton.setTitle("Next", for: .normal)
         gameVC.greenButton.isEnabled = true

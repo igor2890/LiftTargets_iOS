@@ -22,9 +22,13 @@ class GameController: UIViewController {
     var game: Game!
     weak var bluetoothManager: BluetoothManager!
     
-    var timer: Timer?
-    var timerCount: Double = 0.0
-    var timerInterval = 0.1
+    var isScreenAlwaysOn: Bool = false {
+        willSet {
+            UIApplication.shared.isIdleTimerDisabled = newValue
+        }
+    }
+    
+    let buttonsCornerRadius = 10.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,13 @@ class GameController: UIViewController {
         playersTableView.register(
             UINib(nibName: "PlayerCell", bundle: nil),
             forCellReuseIdentifier: "playerCell")
+        
+        greenButton.clipsToBounds = true
+        yellowButton.clipsToBounds = true
+        redButton.clipsToBounds = true
+        greenButton.layer.cornerRadius = buttonsCornerRadius
+        yellowButton.layer.cornerRadius = buttonsCornerRadius
+        redButton.layer.cornerRadius = buttonsCornerRadius
         
         game.configure()
     }
@@ -52,42 +63,15 @@ class GameController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIApplication.shared.isIdleTimerDisabled = true
         bluetoothManager.subscribe(watcher: game)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        UIApplication.shared.isIdleTimerDisabled = false
         bluetoothManager.unsubscribe(watcher: game)
     }
     
-    func setTimer(time: Double) {
-        timerCount = time
-        timerLabel.text = String(format: "%.1f", timerCount)
-    }
-    
-    func startTimer() {
-        if timer == nil {
-            timer = Timer.scheduledTimer(
-                timeInterval: timerInterval,
-                target: self,
-                selector: #selector(timerFires),
-                userInfo: nil,
-                repeats: true
-            )
-        }
-    }
-    
-    func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    @objc
-    func timerFires() {
-        setTimer(time: timerCount + timerInterval)
-    }
+    //TODO: timer
     
     @IBAction func greenButtonTapped(_ sender: Any) {
         game.state.greenButtonTapped()

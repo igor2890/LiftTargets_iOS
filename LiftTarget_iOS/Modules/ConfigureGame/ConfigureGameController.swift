@@ -10,6 +10,7 @@ import UIKit
 enum SettingType {
     case rounds
     case shoots
+    case timeLimit
 }
 
 struct Setting {
@@ -27,13 +28,18 @@ class ConfigureGameController: UITableViewController {
         Setting(
             type: .rounds,
             name: "Rounds per game:",
-            values: [1,2,3,4,5,],
+            values: [1,2,3,4,5],
             selectedIndex: 2),
         Setting(
             type: .shoots,
             name: "Shoots per round:",
-            values: [5,6,7,8,],
+            values: [5,6,7,8],
             selectedIndex: 0),
+        Setting(
+            type: .timeLimit,
+            name: "Time limit in sec:",
+            values: [30,45,60],
+            selectedIndex: 1),
     ]
     
     var playersLimit = 4
@@ -49,6 +55,9 @@ class ConfigureGameController: UITableViewController {
         super.viewDidLoad()
         playButton.isEnabled = false
         tableView.sectionHeaderTopPadding = 0.0
+        
+        tableView.dragDelegate = self
+        tableView.dragInteractionEnabled = true
     }
 
     // MARK: - Table view data source
@@ -58,17 +67,11 @@ class ConfigureGameController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return playersNames.count + 1
-        }
-        return 2
+        return section == 0 ? playersNames.count + 1 : settings.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Players"
-        }
-        return "Settings"
+        return section == 0 ? "Players" : "Settings"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,7 +133,6 @@ class ConfigureGameController: UITableViewController {
                     else { return }
                     self.playersNames.append(text)
                     tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-                    //TODO: this
                 }
                 let canselAction = UIAlertAction(title: "Cancel", style: .cancel)
                 alert.addAction(addAction)
@@ -162,4 +164,47 @@ class ConfigureGameController: UITableViewController {
         present(gameVC, animated: true)
     }
 
+}
+
+extension ConfigureGameController: UITableViewDragDelegate {
+    
+    func tableView(_ tableView: UITableView, dragSessionAllowsMoveOperation session: UIDragSession) -> Bool {
+        print(session.description)
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if proposedDestinationIndexPath.section == 1 || proposedDestinationIndexPath.row >= playersNames.count {
+            return sourceIndexPath
+        }
+        
+        return proposedDestinationIndexPath
+    }
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        if indexPath.row >= playersNames.count || indexPath.section != 0 { return [] }
+        
+        
+        
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = playersNames[indexPath.row]
+        return [ dragItem ]
+    }
+    
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0 && indexPath.row < playersNames.count ? true : false
+    }
+    //TODO: исправить аутофрэндж
+    override func tableView(
+        _ tableView: UITableView,
+        moveRowAt sourceIndexPath: IndexPath,
+        to destinationIndexPath: IndexPath) {
+            if destinationIndexPath.section == 0,
+               destinationIndexPath.row < playersNames.count {
+                let player = playersNames.remove(at: sourceIndexPath.row)
+                playersNames.insert(player, at: destinationIndexPath.row)
+            } else {
+                tableView.reloadData()
+            }
+        }
 }

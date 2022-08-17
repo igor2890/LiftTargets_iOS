@@ -43,7 +43,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWs-qa-ZLa" customClass="TargetsView" customModule="LiftTarget_iOS" customModuleProvider="target">
                     <rect key="frame" x="64" y="118" width="525.5" height="157"/>
-                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qP4-Pr-UBb">
                     <rect key="frame" x="64" y="285" width="525.5" height="108"/>
@@ -105,7 +105,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="d2n-Z7-jVK" firstAttribute="height" secondItem="x86-dU-JnU" secondAttribute="height" id="1tw-Pk-lvy"/>
                         <constraint firstItem="x86-dU-JnU" firstAttribute="width" secondItem="qP4-Pr-UBb" secondAttribute="width" multiplier="0.25" id="8Wc-g0-YS5"/>
@@ -137,7 +137,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="TVT-qQ-Try" firstAttribute="leading" secondItem="ncV-U6-kt1" secondAttribute="leading" constant="20" id="8yV-C6-63F"/>
                         <constraint firstItem="YFg-7y-VZk" firstAttribute="centerY" secondItem="ncV-U6-kt1" secondAttribute="centerY" id="YZH-V4-Ve6"/>
@@ -178,9 +178,6 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

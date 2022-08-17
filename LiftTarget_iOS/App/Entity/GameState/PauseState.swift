@@ -19,7 +19,7 @@ class PauseState: AbstractGameState {
     }
     
     func begin() {
-        gameVC.stopTimer()
+        game.pause()
         
         gameVC.greenButton.setTitle("Resume", for: .normal)
         gameVC.greenButton.isEnabled = true
