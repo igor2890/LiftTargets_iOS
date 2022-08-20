@@ -53,6 +53,8 @@ class ConfigureGameController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Game configure"
+        
         playButton.isEnabled = false
         tableView.sectionHeaderTopPadding = 0.0
         

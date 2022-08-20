@@ -49,16 +49,20 @@ class MainController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
     var myCharactericric: CBCharacteristic?
-//    var myDescriptor: CBDescriptor?
     var searchVC: SearchController?
     var gameVC: GameController?
 
     //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "SmartyTir"
+        
         centralBluetoothManager = CBCentralManager(delegate:self, queue:nil, options: nil)
         peripheralBluetoothManager = CBPeripheralManager(delegate: self, queue: nil)
-        scanButton.isEnabled = false
+        //TODO: TEST!!! CHANGE TO FALSE WHEN REAL USE
+        scanButton.isEnabled = true
+        //___________________________________________
         disconnectButton.isEnabled = false
         //TODO: TEST!!! CHANGE TO FALSE WHEN REAL USE
         playButton.isEnabled = true
@@ -111,7 +115,9 @@ class MainController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if central.state == .poweredOn && myPeripheral == nil {
             scanButton.isEnabled = true
         } else {
-            scanButton.isEnabled = false
+            //TODO: CHANGE TO FALSE
+            scanButton.isEnabled = true
+            //_____________________
         }
     }
     
@@ -147,7 +153,6 @@ class MainController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     func clearCBObjects() {
         myPeripheral = nil
         myCharactericric = nil
-//        myDescriptor = nil
     }
     
     //MARK: PeripheralManager
@@ -204,21 +209,6 @@ class MainController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         }
     }
     
-//    func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?) {
-//        guard error == nil else {
-//            errorHandler(error: error)
-//            return
-//        }
-//        guard let descriptors = characteristic.descriptors
-//        else {
-//            print("no descriptors finded")
-//            return
-//        }
-//        for descriptor in descriptors {
-//            myDescriptor = descriptor
-//        }
-//    }
-    
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
             errorHandler(error: error)
@@ -234,13 +224,6 @@ class MainController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         }
         guard let value = characteristic.value else { return }
         let array = [UInt8](value)
-//        print(array.description)
-//        let newArray = array.dropLast()
-//        guard let text = String(bytes: newArray, encoding: .ascii)
-//        else {
-//            print("decoding error")
-//            return
-//        }
         notificationWatchers(bytes: array)
     }
     

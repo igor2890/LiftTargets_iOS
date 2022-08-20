@@ -18,7 +18,8 @@ class SearchController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.largeContentTitle = "Devices"
+        title = "Select target"
+        
         mainVC.startScan()
     }
     
@@ -29,39 +30,29 @@ class SearchController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 3
-        } else {
-            return peripheralsInfoList.count
-        }
+        return peripheralsInfoList.count
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         do {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-        if indexPath.section == 1 {
-            mainVC.connect(peripheralAt: indexPath.row)
-            navigationController?.popViewController(animated: true)
-        }
+        mainVC.connect(peripheralAt: indexPath.row)
+        navigationController?.popViewController(animated: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuse") else { return UITableViewCell() }
-            let peripheralInfo = peripheralsInfoList[indexPath.row]
-            var config = cell.defaultContentConfiguration()
-            config.text = peripheralInfo.0
-            config.secondaryText = peripheralInfo.1
-            cell.contentConfiguration = config
-            return cell
-        } else {
-            return UITableViewCell()
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuse") else { return UITableViewCell() }
+        let peripheralInfo = peripheralsInfoList[indexPath.row]
+        var config = cell.defaultContentConfiguration()
+        config.text = peripheralInfo.0
+        config.secondaryText = peripheralInfo.1
+        cell.contentConfiguration = config
+        return cell
     }
-
+    
 }
