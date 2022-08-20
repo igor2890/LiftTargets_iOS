@@ -31,6 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if let navVC = window?.rootViewController as? UINavigationController,
+           navVC.viewControllers.last?.presentedViewController is GameController {
+            return .landscape
+        }
+        return .portrait
+    }
 
 }
 

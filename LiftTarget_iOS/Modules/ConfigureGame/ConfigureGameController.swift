@@ -59,6 +59,18 @@ class ConfigureGameController: UITableViewController {
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
     }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
 
     // MARK: - Table view data source
 
@@ -162,11 +174,12 @@ class ConfigureGameController: UITableViewController {
         let players = playersNames.map { Player(name: $0) }
         gameVC.game = Game(gameVC: gameVC, players: players, settings: settings)
         gameVC.bluetoothManager = mainVC
+//        navigationController?.pushViewController(gameVC, animated: true)
         present(gameVC, animated: true)
     }
 
 }
-
+//MARK: Drag players
 extension ConfigureGameController: UITableViewDragDelegate {
     
     func tableView(_ tableView: UITableView, dragSessionAllowsMoveOperation session: UIDragSession) -> Bool {
@@ -195,11 +208,8 @@ extension ConfigureGameController: UITableViewDragDelegate {
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 0 && indexPath.row < playersNames.count ? true : false
     }
-    //TODO: исправить аутофрэндж
-    override func tableView(
-        _ tableView: UITableView,
-        moveRowAt sourceIndexPath: IndexPath,
-        to destinationIndexPath: IndexPath) {
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
             if destinationIndexPath.section == 0,
                destinationIndexPath.row < playersNames.count {
                 let player = playersNames.remove(at: sourceIndexPath.row)

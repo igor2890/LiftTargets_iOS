@@ -9,6 +9,7 @@ import UIKit
 
 class GameController: UIViewController {
     @IBOutlet weak var currentNameLabel: UILabel!
+    @IBOutlet weak var currentRoundLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var targetsView: TargetsView!

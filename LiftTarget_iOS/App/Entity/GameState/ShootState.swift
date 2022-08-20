@@ -18,6 +18,7 @@ class ShootState: AbstractGameState {
     
     func begin() {
         gameVC.currentNameLabel.text = game.players[game.currentPlayerIndex].name
+        gameVC.currentRoundLabel.text = "Round: \(game.currentRound + 1)"
         
         gameVC.isScreenAlwaysOn = true
         

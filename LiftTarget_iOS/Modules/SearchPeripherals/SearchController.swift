@@ -25,7 +25,7 @@ class SearchController: UITableViewController {
     override func viewDidDisappear(_ animated: Bool) {
         mainVC.stopScan()
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

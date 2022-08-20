@@ -24,6 +24,7 @@ class WaitState: AbstractGameState {
         game.setTimer(time: 0.0)
         
         gameVC.currentNameLabel.text = ""
+        gameVC.currentRoundLabel.text = "Round: "
         gameVC.isScreenAlwaysOn = false
         
         gameVC.greenButton.setTitle("Start", for: .normal)
@@ -37,6 +38,8 @@ class WaitState: AbstractGameState {
     
     func greenButtonTapped() {
         game.bluetoothManager.sendMessageToPeripheral(msg: "+U")
+        //TODO: develop mode
+        game.state = game.shootState
     }
     
     func yellowButtonTapped() {
