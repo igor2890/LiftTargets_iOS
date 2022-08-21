@@ -7,14 +7,25 @@
 
 import Foundation
 
-struct Session {
-    var shoots: Int
-    var hits: Int
-    var time: Double
+class Session {
+    var shoots: Int = 0
+    var hits: Int = 0
+    var startTimeStamp: Int = 0
+    var endTimeStamp: Int = 0
+    var pauseTime: Int = 0
+    var time: Double {
+        return Double(endTimeStamp - startTimeStamp - pauseTime) / 1000
+    }
+    
+    init(startTime: Int) {
+        self.startTimeStamp = startTime
+    }
 }
 
 class Player {
     let name: String
+    var sessions: [Session] = []
+    
     var totalShoots: Int {
         sessions
             .map { $0.shoots }
@@ -26,7 +37,12 @@ class Player {
             .reduce(0, +)
     }
     
-    private var sessions: [Session] = []
+    var totalTime: Double {
+        sessions
+            .map { $0.time }
+            .reduce(0, +)
+    }
+    
     
     init(name: String) {
         self.name = name
@@ -34,9 +50,5 @@ class Player {
     
     func add(session: Session) {
         sessions.append(session)
-    }
-    
-    func getSessions() -> [Session] {
-        sessions
     }
 }

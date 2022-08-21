@@ -28,12 +28,15 @@ class Game {
     let id = UUID()
     let players: [Player]
 
-    private var shootsPerSession: Int = 0
-    var roundsPerSession: Int = 0
+    private var shootsPerSession: Int = 5
+    private(set) var roundsPerSession: Int = 0
     private var timerLimit: Int = 0
     
-    var currentRound: Int = 0
-    var currentPlayerIndex: Int = 0
+    private(set) var currentRound: Int = 0
+    private var currentPlayerIndex: Int = 0
+    var currentPlayer: Player {
+        return players[currentPlayerIndex]
+    }
     
     //MARK: Init
     init(gameVC: GameController, players: [Player], settings: [Setting]) {
@@ -58,6 +61,26 @@ class Game {
         shootState = ShootState(gameVC: gameVC, game: self)
         pauseState = PauseState(gameVC: gameVC, game: self)
         state = waitState
+    }
+    
+    func reset() {
+        currentPlayerIndex = 0
+        currentRound = 0
+    }
+    
+    func nextPlayerAndRound() {
+        if currentPlayerIndex < players.count - 1 {
+            currentPlayerIndex += 1
+        } else {
+            currentPlayerIndex = 0
+            currentRound += 1
+        }
+        
+        if currentRound >= roundsPerSession {
+            state = waitState
+        } else {
+            state = shootState
+        }
     }
     
     //MARK: Buttons Taps Handlers
@@ -105,8 +128,8 @@ class Game {
 //MARK: BluetoothWatcher
 extension Game: BluetoothWatcher {
     func receiveFromTarget(notification: TargetNotification) {
-        state.notifReceive(targetNotification: notification)
-        print(notification.timeStamp)
+        gameVC.targetsView.setTargets(targetStates: notification.targetStates)
+        state.targetNotifReceive(targetNotification: notification)
     }
     
     func receiveError(msg: String) {

@@ -17,6 +17,5 @@ protocol AbstractGameState {
     func greenButtonTapped()
     func yellowButtonTapped()
     func redButtonTapped()
-    func notifReceive(targetNotification notif: TargetNotification)
+    func targetNotifReceive(targetNotification notif: TargetNotification)
 }
-

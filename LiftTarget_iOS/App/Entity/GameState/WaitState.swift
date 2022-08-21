@@ -17,9 +17,7 @@ class WaitState: AbstractGameState {
     }
     
     func begin() {
-        game.currentPlayerIndex = 0
-        game.currentRound = 0
-        
+        game.reset()
         game.stopTimer()
         game.setTimer(time: 0.0)
         
@@ -37,21 +35,15 @@ class WaitState: AbstractGameState {
     }
     
     func greenButtonTapped() {
-        game.bluetoothManager.sendMessageToPeripheral(msg: "+U")
-        //TODO: develop mode
         game.state = game.shootState
+        game.bluetoothManager.sendMessageToPeripheral(msg: "+U")
     }
     
-    func yellowButtonTapped() {
-        
-    }
+    func yellowButtonTapped() { }
 
     func redButtonTapped() {
         gameVC.dismiss(animated: true)
     }
     
-    func notifReceive(targetNotification notif: TargetNotification) {
-        if notif.isAllUp { game.state = game.shootState }
-        gameVC.targetsView.setTargets(targetStates: notif.targetStates)
-    }
+    func targetNotifReceive(targetNotification notif: TargetNotification) {}
 }

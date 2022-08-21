@@ -8,10 +8,12 @@
 import Foundation
 
 import Foundation
+import QuartzCore
 
 class PauseState: AbstractGameState {
     weak var gameVC: GameController!
     weak var game: Game!
+    private var startPauseTime: DispatchTime!
 
     required init(gameVC: GameController, game: Game) {
         self.gameVC = gameVC
@@ -20,6 +22,7 @@ class PauseState: AbstractGameState {
     
     func begin() {
         game.stopTimer()
+        startPauseTime = DispatchTime.now()
 
         gameVC.isScreenAlwaysOn = false
         
@@ -32,6 +35,9 @@ class PauseState: AbstractGameState {
     }
     
     func greenButtonTapped() {
+        let currentDate = DispatchTime.now()
+        let pauseTime = (currentDate.uptimeNanoseconds - currentDate.uptimeNanoseconds) / 1000000
+        game.currentPlayer.sessions.last?.pauseTime += Int(pauseTime)
         game.state = game.shootState
     }
     
@@ -42,7 +48,6 @@ class PauseState: AbstractGameState {
         game.state = game.waitState
     }
     
-    func notifReceive(targetNotification notif: TargetNotification) {
-        gameVC.targetsView.setTargets(targetStates: notif.targetStates)
+    func targetNotifReceive(targetNotification notif: TargetNotification) {
     }
 }

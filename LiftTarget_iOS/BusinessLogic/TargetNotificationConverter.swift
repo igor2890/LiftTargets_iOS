@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias Milliseconds = UInt32
+typealias Milliseconds = Int
 typealias IsDown = Bool
 
 struct TargetNotification: CustomStringConvertible {
@@ -39,10 +39,10 @@ class TargetNotificationConverter {
     
     func convert(bytes array: [UInt8]) -> TargetNotification {
         let timeStamp =
-            (UInt32(array[0]) << 24) +
-            (UInt32(array[1]) << 16) +
-            (UInt32(array[2]) << 8) +
-            UInt32(array[3])
+            (Int(array[0]) << 24) +
+            (Int(array[1]) << 16) +
+            (Int(array[2]) << 8) +
+            Int(array[3])
         let targetStates: [Bool] = [
             array[4] >> 4 & 1 == 1,
             array[4] >> 3 & 1 == 1,

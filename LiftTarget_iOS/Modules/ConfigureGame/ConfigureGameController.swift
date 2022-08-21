@@ -30,11 +30,11 @@ class ConfigureGameController: UITableViewController {
             name: "Rounds per game:",
             values: [1,2,3,4,5],
             selectedIndex: 2),
-        Setting(
-            type: .shoots,
-            name: "Shoots per round:",
-            values: [5,6,7,8],
-            selectedIndex: 0),
+//        Setting(
+//            type: .shoots,
+//            name: "Shoots per round:",
+//            values: [5,6,7,8],
+//            selectedIndex: 0),
         Setting(
             type: .timeLimit,
             name: "Time limit in sec:",
@@ -53,7 +53,7 @@ class ConfigureGameController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Game configure"
+        title = "Configure game"
         
         playButton.isEnabled = false
         tableView.sectionHeaderTopPadding = 0.0
