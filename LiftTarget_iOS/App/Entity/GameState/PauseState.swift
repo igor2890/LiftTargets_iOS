@@ -39,6 +39,7 @@ class PauseState: AbstractGameState {
         let pauseTime = (currentDate.uptimeNanoseconds - currentDate.uptimeNanoseconds) / 1000000
         game.currentPlayer.sessions.last?.pauseTime += Int(pauseTime)
         game.state = game.shootState
+        game.startTimer()
     }
     
     func yellowButtonTapped() {

@@ -28,8 +28,6 @@ class ShootState: AbstractGameState {
         gameVC.yellowButton.isEnabled = true
         gameVC.redButton.setTitle("Stop", for: .normal)
         gameVC.redButton.isEnabled = true
-        
-        game.startTimer()
     }
     
     func greenButtonTapped() {
@@ -45,6 +43,7 @@ class ShootState: AbstractGameState {
     }
     
     func targetNotifReceive(targetNotification notif: TargetNotification) {
+        game.startTimer()
         if notif.isAllUp {
             game.currentPlayer.add(session: Session(startTime: notif.timeStamp))
             return

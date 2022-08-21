@@ -60,7 +60,7 @@ class GameController: UIViewController {
     }
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .landscapeLeft
+        return .landscapeRight
     }
     
     override func viewDidAppear(_ animated: Bool) {
