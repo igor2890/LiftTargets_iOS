@@ -33,7 +33,12 @@ class WaitState: AbstractGameState {
         gameVC.redButton.isEnabled = true
         
         if game.isEnd {
-            gameVC.showOk(title: "Game end", message: "You win, all OK")
+            let result = GameReferee.judge(players: game.players)
+            gameVC.showOk(title: "Game end", message: result) {
+                self.game.players.forEach {
+                    $0.sessions = []
+                }
+            }
         }
     }
     

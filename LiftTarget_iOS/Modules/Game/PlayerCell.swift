@@ -18,13 +18,9 @@ class PlayerCell: UITableViewCell {
         nameLabel.text = player.name
         let shoots = player.totalShoots
         let hits = player.totalHits
+        let percent = player.totalPercent
         shootsLabel.text = String(shoots)
         hitsLabel.text = String(hits)
-        if shoots == 0 {
-            percentLabel.text = "100 %"
-        } else {
-            percentLabel.text = String(Int(Double(hits) / Double(shoots) * 100)) + " %"
-        }
+        percentLabel.text = String(percent) + " %"
     }
-    
 }

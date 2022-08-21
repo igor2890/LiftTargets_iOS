@@ -17,6 +17,8 @@ class ShootState: AbstractGameState {
     }
     
     func begin() {
+        gameVC.playersTableView.reloadData()
+        
         gameVC.currentNameLabel.text = game.currentPlayer.name
         gameVC.currentRoundLabel.text = "Round: \(game.currentRound + 1)"
         

@@ -7,21 +7,6 @@
 
 import Foundation
 
-class Session {
-    var shoots: Int = 0
-    var hits: Int = 0
-    var startTimeStamp: Int = 0
-    var endTimeStamp: Int = 0
-    var pauseTime: Int = 0
-    var time: Double {
-        return Double(endTimeStamp - startTimeStamp - pauseTime) / 1000
-    }
-    
-    init(startTime: Int) {
-        self.startTimeStamp = startTime
-    }
-}
-
 class Player {
     let name: String
     var sessions: [Session] = []
@@ -41,6 +26,15 @@ class Player {
         sessions
             .map { $0.time }
             .reduce(0, +)
+    }
+    
+    var totalPercent: Int {
+        let shoots = totalShoots
+        if shoots == 0 {
+            return 100
+        } else {
+            return Int(Double(totalHits) / Double(shoots) * 100)
+        }
     }
     
     

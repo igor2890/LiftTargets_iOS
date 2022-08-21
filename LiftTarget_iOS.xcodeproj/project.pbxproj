@@ -33,6 +33,8 @@
 		40AE687028A97C8F00717AA4 /* LiftTarget_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE686F28A97C8F00717AA4 /* LiftTarget_iOSTests.swift */; };
 		40AE687D28A97CCB00717AA4 /* LiftTarget_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE687C28A97CCB00717AA4 /* LiftTarget_iOSUITests.swift */; };
 		40AE687F28A97CCB00717AA4 /* LiftTarget_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE687E28A97CCB00717AA4 /* LiftTarget_iOSUITestsLaunchTests.swift */; };
+		40AE688628B2DFAB00717AA4 /* GameReferee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE688528B2DFAB00717AA4 /* GameReferee.swift */; };
+		40AE688828B2E18000717AA4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE688728B2E18000717AA4 /* Session.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		40AE687A28A97CCB00717AA4 /* LiftTarget_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftTarget_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40AE687C28A97CCB00717AA4 /* LiftTarget_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftTarget_iOSUITests.swift; sourceTree = "<group>"; };
 		40AE687E28A97CCB00717AA4 /* LiftTarget_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftTarget_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		40AE688528B2DFAB00717AA4 /* GameReferee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReferee.swift; sourceTree = "<group>"; };
+		40AE688728B2E18000717AA4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +240,8 @@
 				40AE685828A93A0D00717AA4 /* GameState */,
 				402223D4289F0EAE00859817 /* Game.swift */,
 				40AE685628A935B000717AA4 /* Player.swift */,
+				40AE688728B2E18000717AA4 /* Session.swift */,
+				40AE688528B2DFAB00717AA4 /* GameReferee.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -415,11 +421,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40AE688828B2E18000717AA4 /* Session.swift in Sources */,
 				40A8F9FF287049FF000BCFF6 /* MainController.swift in Sources */,
 				40AE684D28A8C80800717AA4 /* UIVC+Ext.swift in Sources */,
 				402223DB289FA92600859817 /* GameController.swift in Sources */,
 				40AE686028A93BEC00717AA4 /* ShootState.swift in Sources */,
 				40AE684F28A8F1CD00717AA4 /* SettingCell.swift in Sources */,
+				40AE688628B2DFAB00717AA4 /* GameReferee.swift in Sources */,
 				40AE685728A935B000717AA4 /* Player.swift in Sources */,
 				402223D5289F0EAE00859817 /* Game.swift in Sources */,
 				40A8F9FB287049FF000BCFF6 /* AppDelegate.swift in Sources */,
