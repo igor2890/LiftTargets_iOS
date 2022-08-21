@@ -32,6 +32,9 @@ class WaitState: AbstractGameState {
         gameVC.redButton.setTitle("Exit", for: .normal)
         gameVC.redButton.isEnabled = true
         
+        if game.isEnd {
+            gameVC.showOk(title: "Game end", message: "You win, all OK")
+        }
     }
     
     func greenButtonTapped() {

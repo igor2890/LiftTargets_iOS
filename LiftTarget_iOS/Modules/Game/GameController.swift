@@ -49,6 +49,8 @@ class GameController: UIViewController {
         yellowButton.layer.cornerRadius = buttonsCornerRadius
         redButton.layer.cornerRadius = buttonsCornerRadius
         
+        yellowButton.setTitleColor(.black, for: .normal)
+        
         game.configure()
         game.bluetoothManager = bluetoothManager
     }

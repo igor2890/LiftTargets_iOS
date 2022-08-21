@@ -27,6 +27,8 @@ class Game {
     
     let id = UUID()
     let players: [Player]
+    
+    var isEnd = false
 
     private var shootsPerSession: Int = 5
     private(set) var roundsPerSession: Int = 0
@@ -77,6 +79,7 @@ class Game {
         }
         
         if currentRound >= roundsPerSession {
+            isEnd = true
             state = waitState
         } else {
             state = shootState
