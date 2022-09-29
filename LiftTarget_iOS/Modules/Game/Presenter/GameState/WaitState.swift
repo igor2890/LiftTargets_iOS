@@ -44,7 +44,7 @@ class WaitState: AbstractGameState {
     
     func greenButtonTapped() {
         game.state = game.shootState
-        game.bluetoothManager.sendMessageToPeripheral(msg: "+U")
+        game.deviceManager.liftTargetsAndAskForStatus()
     }
     
     func yellowButtonTapped() { }
@@ -54,4 +54,6 @@ class WaitState: AbstractGameState {
     }
     
     func targetNotifReceive(targetNotification notif: TargetNotification) {}
+    
+    func gunDidShoot(player: Player) {}
 }

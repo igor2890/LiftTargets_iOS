@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		402223C6289B039800859817 /* ConfigureGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402223C5289B039800859817 /* ConfigureGameController.swift */; };
-		402223CE289C74F800859817 /* MainController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402223CD289C74F800859817 /* MainController+Ext.swift */; };
 		402223D1289F019500859817 /* TargetNotificationConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402223D0289F019500859817 /* TargetNotificationConverter.swift */; };
 		402223D5289F0EAE00859817 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402223D4289F0EAE00859817 /* Game.swift */; };
 		402223DB289FA92600859817 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402223D9289FA92600859817 /* GameController.swift */; };
@@ -35,6 +34,10 @@
 		40AE687F28A97CCB00717AA4 /* LiftTarget_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE687E28A97CCB00717AA4 /* LiftTarget_iOSUITestsLaunchTests.swift */; };
 		40AE688628B2DFAB00717AA4 /* GameReferee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE688528B2DFAB00717AA4 /* GameReferee.swift */; };
 		40AE688828B2E18000717AA4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AE688728B2E18000717AA4 /* Session.swift */; };
+		40E2584028DEE3EB00EA6F96 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2583F28DEE3EB00EA6F96 /* DeviceManager.swift */; };
+		40E2584228DF11A600EA6F96 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2584128DF11A600EA6F96 /* BluetoothManager.swift */; };
+		40E2584428DF17B500EA6F96 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2584328DF17B500EA6F96 /* Device.swift */; };
+		40E2584B28E097B200EA6F96 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2584A28E097B200EA6F96 /* Setting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +59,6 @@
 
 /* Begin PBXFileReference section */
 		402223C5289B039800859817 /* ConfigureGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureGameController.swift; sourceTree = "<group>"; };
-		402223CD289C74F800859817 /* MainController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainController+Ext.swift"; sourceTree = "<group>"; };
 		402223D0289F019500859817 /* TargetNotificationConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetNotificationConverter.swift; sourceTree = "<group>"; };
 		402223D4289F0EAE00859817 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		402223D9289FA92600859817 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,10 @@
 		40AE687E28A97CCB00717AA4 /* LiftTarget_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftTarget_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		40AE688528B2DFAB00717AA4 /* GameReferee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReferee.swift; sourceTree = "<group>"; };
 		40AE688728B2E18000717AA4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		40E2583F28DEE3EB00EA6F96 /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		40E2584128DF11A600EA6F96 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		40E2584328DF17B500EA6F96 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		40E2584A28E097B200EA6F96 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				40A8F9FE287049FF000BCFF6 /* MainController.swift */,
-				402223CD289C74F800859817 /* MainController+Ext.swift */,
 			);
 			path = MainController;
 			sourceTree = "<group>";
@@ -126,8 +131,8 @@
 		402223D3289F0E7E00859817 /* ConfigureGame */ = {
 			isa = PBXGroup;
 			children = (
-				402223C5289B039800859817 /* ConfigureGameController.swift */,
-				40AE684E28A8F1CD00717AA4 /* SettingCell.swift */,
+				40E2584928E0979B00EA6F96 /* Model */,
+				40E2584C28E097C600EA6F96 /* ViewController */,
 			);
 			path = ConfigureGame;
 			sourceTree = "<group>";
@@ -136,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				402223CC289C74BF00859817 /* MainController */,
-				402223D8289FA6F200859817 /* SearchPeripherals */,
 				402223D3289F0E7E00859817 /* ConfigureGame */,
 				402223D7289FA6DE00859817 /* Game */,
 			);
@@ -146,21 +150,11 @@
 		402223D7289FA6DE00859817 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				402223D9289FA92600859817 /* GameController.swift */,
-				402223DA289FA92600859817 /* GameController.xib */,
-				402223DD28A7C92400859817 /* TargetsView.swift */,
-				40AE685228A9186E00717AA4 /* PlayerCell.swift */,
-				40AE685328A9186E00717AA4 /* PlayerCell.xib */,
+				40E2584528E0940200EA6F96 /* Model */,
+				40E2584628E0940B00EA6F96 /* View */,
+				40E2584728E0941200EA6F96 /* Presenter */,
 			);
 			path = Game;
-			sourceTree = "<group>";
-		};
-		402223D8289FA6F200859817 /* SearchPeripherals */ = {
-			isa = PBXGroup;
-			children = (
-				40A8FA0E28704E69000BCFF6 /* SearchController.swift */,
-			);
-			path = SearchPeripherals;
 			sourceTree = "<group>";
 		};
 		402223DF28A816EB00859817 /* Environments */ = {
@@ -194,7 +188,7 @@
 		40A8F9F9287049FF000BCFF6 /* LiftTarget_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				40AE686628A97B0300717AA4 /* BusinessLogic */,
+				40AE686628A97B0300717AA4 /* Services */,
 				40AE686528A9791500717AA4 /* Resources */,
 				40AE684A28A8188800717AA4 /* App */,
 				40AE684B28A8C7E000717AA4 /* Core */,
@@ -208,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				40AE686428A95E6700717AA4 /* Flows */,
-				40AE686328A95E3000717AA4 /* Entity */,
 				40A8F9FA287049FF000BCFF6 /* AppDelegate.swift */,
 				40A8F9FC287049FF000BCFF6 /* SceneDelegate.swift */,
 			);
@@ -234,18 +227,6 @@
 			path = GameState;
 			sourceTree = "<group>";
 		};
-		40AE686328A95E3000717AA4 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				40AE685828A93A0D00717AA4 /* GameState */,
-				402223D4289F0EAE00859817 /* Game.swift */,
-				40AE685628A935B000717AA4 /* Player.swift */,
-				40AE688728B2E18000717AA4 /* Session.swift */,
-				40AE688528B2DFAB00717AA4 /* GameReferee.swift */,
-			);
-			path = Entity;
-			sourceTree = "<group>";
-		};
 		40AE686428A95E6700717AA4 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,12 +244,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		40AE686628A97B0300717AA4 /* BusinessLogic */ = {
+		40AE686628A97B0300717AA4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				40E2584828E094AC00EA6F96 /* DeviceManager */,
 				402223D0289F019500859817 /* TargetNotificationConverter.swift */,
+				40E2584128DF11A600EA6F96 /* BluetoothManager.swift */,
 			);
-			path = BusinessLogic;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		40AE686E28A97C8F00717AA4 /* LiftTarget_iOSTests */ = {
@@ -286,6 +269,64 @@
 				40AE687E28A97CCB00717AA4 /* LiftTarget_iOSUITestsLaunchTests.swift */,
 			);
 			path = LiftTarget_iOSUITests;
+			sourceTree = "<group>";
+		};
+		40E2584528E0940200EA6F96 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				40AE685628A935B000717AA4 /* Player.swift */,
+				40AE688728B2E18000717AA4 /* Session.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		40E2584628E0940B00EA6F96 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				402223D9289FA92600859817 /* GameController.swift */,
+				402223DA289FA92600859817 /* GameController.xib */,
+				402223DD28A7C92400859817 /* TargetsView.swift */,
+				40AE685228A9186E00717AA4 /* PlayerCell.swift */,
+				40AE685328A9186E00717AA4 /* PlayerCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		40E2584728E0941200EA6F96 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				402223D4289F0EAE00859817 /* Game.swift */,
+				40AE685828A93A0D00717AA4 /* GameState */,
+				40AE688528B2DFAB00717AA4 /* GameReferee.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		40E2584828E094AC00EA6F96 /* DeviceManager */ = {
+			isa = PBXGroup;
+			children = (
+				40E2583F28DEE3EB00EA6F96 /* DeviceManager.swift */,
+				40E2584328DF17B500EA6F96 /* Device.swift */,
+			);
+			path = DeviceManager;
+			sourceTree = "<group>";
+		};
+		40E2584928E0979B00EA6F96 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				40E2584A28E097B200EA6F96 /* Setting.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		40E2584C28E097C600EA6F96 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				402223C5289B039800859817 /* ConfigureGameController.swift */,
+				40AE684E28A8F1CD00717AA4 /* SettingCell.swift */,
+				40A8FA0E28704E69000BCFF6 /* SearchController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,17 +468,20 @@
 				402223DB289FA92600859817 /* GameController.swift in Sources */,
 				40AE686028A93BEC00717AA4 /* ShootState.swift in Sources */,
 				40AE684F28A8F1CD00717AA4 /* SettingCell.swift in Sources */,
+				40E2584B28E097B200EA6F96 /* Setting.swift in Sources */,
 				40AE688628B2DFAB00717AA4 /* GameReferee.swift in Sources */,
 				40AE685728A935B000717AA4 /* Player.swift in Sources */,
 				402223D5289F0EAE00859817 /* Game.swift in Sources */,
 				40A8F9FB287049FF000BCFF6 /* AppDelegate.swift in Sources */,
 				40AE686228A94E7A00717AA4 /* PauseState.swift in Sources */,
 				40A8F9FD287049FF000BCFF6 /* SceneDelegate.swift in Sources */,
-				402223CE289C74F800859817 /* MainController+Ext.swift in Sources */,
+				40E2584028DEE3EB00EA6F96 /* DeviceManager.swift in Sources */,
 				402223C6289B039800859817 /* ConfigureGameController.swift in Sources */,
 				40AE685C28A93AEA00717AA4 /* WaitState.swift in Sources */,
+				40E2584428DF17B500EA6F96 /* Device.swift in Sources */,
 				402223DE28A7C92400859817 /* TargetsView.swift in Sources */,
 				402223D1289F019500859817 /* TargetNotificationConverter.swift in Sources */,
+				40E2584228DF11A600EA6F96 /* BluetoothManager.swift in Sources */,
 				40AE685A28A93A5600717AA4 /* AbstractGameState.swift in Sources */,
 				40A8FA0F28704E69000BCFF6 /* SearchController.swift in Sources */,
 				40AE685428A9186E00717AA4 /* PlayerCell.swift in Sources */,

@@ -36,19 +36,21 @@ class PauseState: AbstractGameState {
     
     func greenButtonTapped() {
         let currentDate = DispatchTime.now()
-        let pauseTime = (currentDate.uptimeNanoseconds - currentDate.uptimeNanoseconds) / 1000000
-        game.currentPlayer.sessions.last?.pauseTime += Int(pauseTime)
+        let pauseTime = (currentDate.uptimeNanoseconds - startPauseTime.uptimeNanoseconds) / 1000000
+        if let session = game.currentPlayer.sessions.last {
+            session.pauseTime += Int(pauseTime)
+        }
         game.state = game.shootState
         game.startTimer()
     }
     
-    func yellowButtonTapped() {
-    }
+    func yellowButtonTapped() {}
     
     func redButtonTapped() {
         game.state = game.waitState
     }
     
-    func targetNotifReceive(targetNotification notif: TargetNotification) {
-    }
+    func targetNotifReceive(targetNotification notif: TargetNotification) {}
+    
+    func gunDidShoot(player: Player) {}
 }

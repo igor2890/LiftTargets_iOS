@@ -11,6 +11,8 @@ class ShootState: AbstractGameState {
     weak var gameVC: GameController!
     weak var game: Game!
     
+    var timer: Timer?
+    
     required init(gameVC: GameController, game: Game) {
         self.gameVC = gameVC
         self.game = game
@@ -57,10 +59,25 @@ class ShootState: AbstractGameState {
         }
     }
     
+    func gunDidShoot(player: Player) {
+        if player.name == game.currentPlayer.name {
+            game.currentPlayer.sessions.last?.shoots += 1
+        }
+        if game.isShootsLimitOn,
+           let shoots = game.currentPlayer.sessions.last?.shoots,
+           shoots >= game.shootsPerSession {
+            timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) {_ in
+                if let shoots = self.game.currentPlayer.sessions.last?.shoots,
+                   shoots >= self.game.shootsPerSession {
+                    self.nextPlayer()
+                }
+            }
+        }
+    }
+    
     private func nextPlayer() {
-        game.currentPlayer.sessions.last?.shoots = 5
         gameVC.playersTableView.reloadData()
-        game.bluetoothManager.sendMessageToPeripheral(msg: "+U")
+        game.deviceManager.liftTargetsAndAskForStatus()
         game.stopTimer()
         game.setTimer(time: 0.0)
         game.nextPlayerAndRound()

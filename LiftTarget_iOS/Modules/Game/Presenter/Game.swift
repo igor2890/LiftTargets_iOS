@@ -9,7 +9,7 @@ import Foundation
 
 class Game {
     weak var gameVC: GameController!
-    weak var bluetoothManager: BluetoothManager!
+    var deviceManager: DeviceManagerForDelegates!
     
     var state: AbstractGameState! {
         didSet {
@@ -30,9 +30,14 @@ class Game {
     
     var isEnd = false
 
-    private var shootsPerSession: Int = 5
+    private(set) var shootsPerSession: Int = 5
+    private(set) var isShootsLimitOn: Bool = false
+    
     private(set) var roundsPerSession: Int = 0
-    private var timerLimit: Int = 0
+    private(set) var isRoundsLimitOn: Bool = false
+    
+    private(set) var timePerSession: Int = 0
+    private(set) var isTimeLimitOn: Bool = false
     
     private(set) var currentRound: Int = 0
     private var currentPlayerIndex: Int = 0
@@ -44,27 +49,35 @@ class Game {
     init(gameVC: GameController, players: [Player], settings: [Setting]) {
         self.players = players
         if let roundCountSetting = settings.first(where: { $0.type == .rounds }) {
-            self.roundsPerSession = roundCountSetting.values[roundCountSetting.selectedIndex]
+            self.roundsPerSession = roundCountSetting.value
+            self.isRoundsLimitOn = roundCountSetting.enabled
         }
 
         if let shootsCountSession = settings.first(where: { $0.type == .shoots }) {
-            self.shootsPerSession = shootsCountSession.values[shootsCountSession.selectedIndex]
+            self.shootsPerSession = shootsCountSession.value
+            self.isShootsLimitOn = shootsCountSession.enabled
         }
         
-        if let timerLimit = settings.first(where: { $0.type == .timeLimit }) {
-            self.timerLimit = timerLimit.values[timerLimit.selectedIndex]
+        if let timeLimit = settings.first(where: { $0.type == .timeLimit }) {
+            self.timePerSession = timeLimit.value
+            self.isTimeLimitOn = timeLimit.enabled
         }
         
         self.gameVC = gameVC
     }
     
+    //MARK: Configure
     func configure() {
         waitState = WaitState(gameVC: gameVC, game: self)
         shootState = ShootState(gameVC: gameVC, game: self)
         pauseState = PauseState(gameVC: gameVC, game: self)
         state = waitState
+        
+        deviceManager = DeviceManager.instance
+        deviceManager.delegate = self
     }
     
+    //MARK: Actions
     func reset() {
         currentPlayerIndex = 0
         currentRound = 0
@@ -78,7 +91,7 @@ class Game {
             currentRound += 1
         }
         
-        if currentRound >= roundsPerSession {
+        if isRoundsLimitOn && currentRound >= roundsPerSession {
             isEnd = true
             state = waitState
         } else {
@@ -101,7 +114,7 @@ class Game {
 
     //MARK: Timer
     func setTimer(time: Double) {
-        timerCount = time
+        
         gameVC.timerLabel.text = String(format: "%.1f", timerCount)
     }
     
@@ -124,18 +137,29 @@ class Game {
     
     @objc
     private func timerFires() {
-        setTimer(time: timerCount + timerInterval)
+        timerCount = timerCount + timerInterval
+        setTimer(time: timerCount)
+        if isTimeLimitOn && timerCount >= Double(timePerSession) {
+            nextPlayerAndRound()
+        }
     }
 }
 
-//MARK: BluetoothWatcher
-extension Game: BluetoothWatcher {
-    func receiveFromTarget(notification: TargetNotification) {
+//MARK: DeviceManagerDelegate
+extension Game: DeviceManagerDelegate {
+    func didFindDevice(name: String) {}
+    
+    func targetPushNotif(array: [UInt8]) {
+        let notification = TargetNotificationConverter.shared.convert(bytes: array)
         gameVC.targetsView.setTargets(targetStates: notification.targetStates)
         state.targetNotifReceive(targetNotification: notification)
     }
     
-    func receiveError(msg: String) {
-        print(msg)
+    func gunDidShoot(player: Player) {
+        state.gunDidShoot(player: player)
+    }
+    
+    func errorHandler(errorMsg: String) {
+        gameVC.showToast(message: errorMsg)
     }
 }

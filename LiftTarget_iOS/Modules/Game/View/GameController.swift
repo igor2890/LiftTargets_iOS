@@ -20,8 +20,7 @@ class GameController: UIViewController {
     
     @IBOutlet weak var playersTableView: UITableView!
     
-    var game: Game!
-    weak var bluetoothManager: BluetoothManager!
+    var game: Game?
     
     var isScreenAlwaysOn: Bool = false {
         willSet {
@@ -50,9 +49,8 @@ class GameController: UIViewController {
         redButton.layer.cornerRadius = buttonsCornerRadius
         
         yellowButton.setTitleColor(.black, for: .normal)
-        
-        game.configure()
-        game.bluetoothManager = bluetoothManager
+
+        game?.configure()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscape }
@@ -65,26 +63,16 @@ class GameController: UIViewController {
         return .landscapeRight
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        bluetoothManager.subscribe(watcher: game)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        bluetoothManager.unsubscribe(watcher: game)
-    }
-    
     //TODO: timer
     
     @IBAction func greenButtonTapped(_ sender: Any) {
-        game.greenButtonTapped()
+        game?.greenButtonTapped()
     }
     @IBAction func yellowButtonTapped(_ sender: Any) {
-        game.yellowButtonTapped()
+        game?.yellowButtonTapped()
     }
     @IBAction func redButtonTapped(_ sender: Any) {
-        game.redButtonTapped()
+        game?.redButtonTapped()
     }
 }
 
@@ -95,13 +83,13 @@ extension GameController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        game.players.count
+        game?.players.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell") as? PlayerCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell") as? PlayerCell,
+              let player = game?.players[indexPath.row]
         else { return UITableViewCell() }
-        let player = game.players[indexPath.row]
         cell.configure(player: player)
         cell.selectionStyle = .none
         return cell

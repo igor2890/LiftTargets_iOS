@@ -7,49 +7,40 @@
 
 import UIKit
 
-enum SettingType {
-    case rounds
-    case shoots
-    case timeLimit
-}
-
-struct Setting {
-    let type: SettingType
-    let name: String
-    let values: [Int]
-    var selectedIndex: Int
-}
-
 class ConfigureGameController: UITableViewController {
     
     @IBOutlet weak var playButton: UIBarButtonItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     var settings = [
         Setting(
             type: .rounds,
             name: "Rounds per game:",
             values: [1,2,3,4,5],
-            selectedIndex: 2),
-//        Setting(
-//            type: .shoots,
-//            name: "Shoots per round:",
-//            values: [5,6,7,8],
-//            selectedIndex: 0),
+            selectedIndex: 2,
+            enabled: true),
+        Setting(
+            type: .shoots,
+            name: "Shoots per round:",
+            values: [5,6,7,8],
+            selectedIndex: 0,
+            enabled: true),
         Setting(
             type: .timeLimit,
             name: "Time limit in sec:",
             values: [30,45,60],
-            selectedIndex: 1),
+            selectedIndex: 1,
+            enabled: true),
     ]
     
     var playersLimit = 4
     
-    private var playersNames: [String] = [] {
+    private var players: [Player] = [] {
         didSet {
-            playButton.isEnabled = playersNames.count == 0 ? false : true
+            playButton.isEnabled = players.count == 0 ? false : true
         }
     }
-    weak var mainVC: BluetoothManager!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +51,20 @@ class ConfigureGameController: UITableViewController {
         
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let target = DeviceManager.instance.target {
+            if target.state == .disconnected {
+                target.connect()
+            }
+        } else {
+            showSearchVC(for: .target)
+        }
+        
+        DeviceManager.instance.guns.forEach { if $0.state == .disconnected { $0.connect()} }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -73,15 +78,40 @@ class ConfigureGameController: UITableViewController {
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .portrait
     }
+    
+    @IBAction func playTapped(_ sender: Any) {
+        if DeviceManager.instance.target != nil {
+            let gameVC = GameController(nibName: "GameController", bundle: nil)
+            gameVC.modalPresentationStyle = .fullScreen
+            let game = Game(gameVC: gameVC, players: players, settings: settings)
+            gameVC.game = game
+            present(gameVC, animated: true)
+        } else {
+            showSearchVC(for: .target)
+        }
+    }
+    @IBAction func backButtonTapped(_ sender: Any) {
+        DeviceManager.instance.disconnectAll()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func showSearchVC(for type: DeviceType, with player: Player? = nil) {
+        let story = UIStoryboard(name: "Main", bundle: nil)
+        let searchVC = story.instantiateViewController(withIdentifier: "searchVC") as! SearchController
+        searchVC.modalPresentationStyle = .popover
+        searchVC.searchedDeviceType = type
+        searchVC.currentPlayer = player
+        present(searchVC, animated: true)
+    }
 
-    // MARK: - Table view data source
+    // MARK: TableDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? playersNames.count + 1 : settings.count
+        return section == 0 ? players.count + 1 : settings.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -93,10 +123,10 @@ class ConfigureGameController: UITableViewController {
         case 0:
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             var config = cell.defaultContentConfiguration()
-            if playersNames.count == indexPath.row {
+            if players.count == indexPath.row {
                 config.text = "+"
             } else {
-                config.text = playersNames[indexPath.row]
+                config.text = players[indexPath.row].name
                 cell.backgroundColor = UIColor(white: 0.8, alpha: 1)
             }
             config.textProperties.alignment = .center
@@ -109,12 +139,18 @@ class ConfigureGameController: UITableViewController {
             cell.configure(setting: setting)
             cell.countSegmentedControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
             cell.countSegmentedControl.tag = indexPath.row
+            cell.enabledSwitch.addTarget(self, action: #selector(enabledChanged(_:)), for: .valueChanged)
+            cell.enabledSwitch.tag = indexPath.row
             return cell
         }
     }
     
     @objc func segmentValueChanged(_ sender: UISegmentedControl) {
         settings[sender.tag].selectedIndex = sender.selectedSegmentIndex
+    }
+    
+    @objc func enabledChanged(_ sender: UISwitch) {
+        settings[sender.tag].enabled = sender.isOn
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -131,8 +167,8 @@ class ConfigureGameController: UITableViewController {
         }
         switch indexPath.section {
         case 0:
-            if indexPath.row == playersNames.count,
-               playersNames.count < playersLimit {
+            if indexPath.row == players.count,
+               players.count < playersLimit {
                 let alert = UIAlertController(title: "Add player", message: "Enter the player name", preferredStyle: .alert)
                 alert.addTextField() { textField in
                     textField.autocorrectionType = .no
@@ -142,12 +178,16 @@ class ConfigureGameController: UITableViewController {
                 let addAction = UIAlertAction(title: "Add", style: .default) { [weak alert] _ in
                     guard let alert = alert,
                           let textField = alert.textFields?[0],
-                          let text = textField.text,
-                          text != ""
+                          let name = textField.text,
+                          name != ""
                     else { return }
-                    if self.playersNames.contains(text) { return }
-                    self.playersNames.append(text)
+                    let player = Player(name: name)
+                    if self.players.contains(where: { $0.name == player.name}) { return }
+                    self.players.append(player)
+                    
                     tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+
+                    self.showSearchVC(for: .gun, with: player)
                 }
                 let canselAction = UIAlertAction(title: "Cancel", style: .cancel)
                 alert.addAction(addAction)
@@ -160,24 +200,16 @@ class ConfigureGameController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.row == playersNames.count || indexPath.section == 1 {
+        if indexPath.row == players.count || indexPath.section == 1 {
             return UISwipeActionsConfiguration()
         }
         let delAction = UIContextualAction(style: .destructive, title: "Delete"){ _,_,_ in
-            self.playersNames.remove(at: indexPath.row)
+            let name = self.players[indexPath.row].name
+            DeviceManager.instance.disconnect(name: name)
+            self.players.remove(at: indexPath.row)
             tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
         }
         return UISwipeActionsConfiguration(actions: [delAction])
-    }
-
-    @IBAction func playTapped(_ sender: Any) {
-        let gameVC = GameController(nibName: "GameController", bundle: nil)
-        gameVC.modalPresentationStyle = .fullScreen
-        let players = playersNames.map { Player(name: $0) }
-        gameVC.game = Game(gameVC: gameVC, players: players, settings: settings)
-        gameVC.bluetoothManager = mainVC
-//        navigationController?.pushViewController(gameVC, animated: true)
-        present(gameVC, animated: true)
     }
 
 }
@@ -190,7 +222,7 @@ extension ConfigureGameController: UITableViewDragDelegate {
     }
     
     override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-        if proposedDestinationIndexPath.section == 1 || proposedDestinationIndexPath.row >= playersNames.count {
+        if proposedDestinationIndexPath.section == 1 || proposedDestinationIndexPath.row >= players.count {
             return sourceIndexPath
         }
         
@@ -198,24 +230,24 @@ extension ConfigureGameController: UITableViewDragDelegate {
     }
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        if indexPath.row >= playersNames.count || indexPath.section != 0 { return [] }
+        if indexPath.row >= players.count || indexPath.section != 0 { return [] }
         
         
         
         let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = playersNames[indexPath.row]
+        dragItem.localObject = players[indexPath.row]
         return [ dragItem ]
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.section == 0 && indexPath.row < playersNames.count ? true : false
+        return indexPath.section == 0 && indexPath.row < players.count ? true : false
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
             if destinationIndexPath.section == 0,
-               destinationIndexPath.row < playersNames.count {
-                let player = playersNames.remove(at: sourceIndexPath.row)
-                playersNames.insert(player, at: destinationIndexPath.row)
+               destinationIndexPath.row < players.count {
+                let player = players.remove(at: sourceIndexPath.row)
+                players.insert(player, at: destinationIndexPath.row)
             } else {
                 tableView.reloadData()
             }

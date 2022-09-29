@@ -15,7 +15,7 @@ class GameReferee {
         let sortedPlayers = players
             .sorted { $0.totalPercent > $1.totalPercent }
         sortedPlayers.enumerated().forEach { index, player in
-            result += "\(index+1). \(player.name) with \(player.totalPercent)\n"
+            result += "\(index+1). \(player.name) with \(player.totalPercent) and \(player.totalTime)\n"
         }
         return result
     }
