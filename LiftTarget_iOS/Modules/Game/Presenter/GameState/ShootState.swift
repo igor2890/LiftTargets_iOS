@@ -35,7 +35,7 @@ class ShootState: AbstractGameState {
     }
     
     func greenButtonTapped() {
-        nextPlayer()
+        game.deviceManager.renewTarget()
     }
     
     func yellowButtonTapped() {
@@ -47,39 +47,36 @@ class ShootState: AbstractGameState {
     }
     
     func targetNotifReceive(targetNotification notif: TargetNotification) {
-        game.startTimer()
-        if notif.isAllUp {
+        switch notif.type {
+        case .start:
+            gameVC.playersTableView.reloadData()
+            
+            game.stopTimer()
+            game.setTimer(time: 0.0)
+            game.startTimer()
+            
             game.currentPlayer.add(session: Session(startTime: notif.timeStamp))
-            return
-        }
-        game.currentPlayer.sessions.last?.hits = notif.targetStates.filter { $0 }.count
-        if notif.isAllDown {
+        case .notif:
+            break
+        case .end:
+            timer?.invalidate()
             game.currentPlayer.sessions.last?.endTimeStamp = notif.timeStamp
-            nextPlayer()
+            game.stopTimer()
+            game.nextPlayerAndRound()
         }
     }
     
     func gunDidShoot(player: Player) {
         if player.name == game.currentPlayer.name {
             game.currentPlayer.sessions.last?.shoots += 1
-        }
-        if game.isShootsLimitOn,
-           let shoots = game.currentPlayer.sessions.last?.shoots,
-           shoots >= game.shootsPerSession {
-            timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) {_ in
-                if let shoots = self.game.currentPlayer.sessions.last?.shoots,
-                   shoots >= self.game.shootsPerSession {
-                    self.nextPlayer()
+            
+            if game.isShootsLimitOn,
+               let shoots = game.currentPlayer.sessions.last?.shoots,
+               shoots >= game.shootsPerSession {
+                timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) {_ in
+                    self.game.deviceManager.renewTarget()
                 }
             }
         }
-    }
-    
-    private func nextPlayer() {
-        gameVC.playersTableView.reloadData()
-        game.deviceManager.liftTargetsAndAskForStatus()
-        game.stopTimer()
-        game.setTimer(time: 0.0)
-        game.nextPlayerAndRound()
     }
 }

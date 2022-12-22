@@ -101,6 +101,7 @@ class ConfigureGameController: UITableViewController {
         searchVC.modalPresentationStyle = .popover
         searchVC.searchedDeviceType = type
         searchVC.currentPlayer = player
+        searchVC.devices = DeviceManager.instance.guns.map { $0.name }
         present(searchVC, animated: true)
     }
 

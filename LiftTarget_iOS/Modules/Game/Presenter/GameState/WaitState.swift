@@ -44,7 +44,7 @@ class WaitState: AbstractGameState {
     
     func greenButtonTapped() {
         game.state = game.shootState
-        game.deviceManager.liftTargetsAndAskForStatus()
+        game.deviceManager.renewTarget()
     }
     
     func yellowButtonTapped() { }

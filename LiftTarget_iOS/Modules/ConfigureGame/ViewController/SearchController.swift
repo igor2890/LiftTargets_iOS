@@ -44,7 +44,7 @@ class SearchController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -97,15 +97,17 @@ class SearchController: UITableViewController {
 }
 
 extension SearchController: DeviceManagerDelegate {
+    
     func didFindDevice(name: String) {
         devices.append(name)
     }
     
-    func targetPushNotif(array: [UInt8]) {}
-    
+    func targetPushNotif(notif: TargetNotification) {}
     func gunDidShoot(player: Player) {}
     
     func errorHandler(errorMsg: String) {
         showToast(message: errorMsg)
     }
+    
+
 }

@@ -41,6 +41,9 @@ class GameController: UIViewController {
             UINib(nibName: "PlayerCell", bundle: nil),
             forCellReuseIdentifier: "playerCell")
         
+        currentNameLabel.adjustsFontSizeToFitWidth = true
+        currentNameLabel.minimumScaleFactor = 0.2
+        
         greenButton.clipsToBounds = true
         yellowButton.clipsToBounds = true
         redButton.clipsToBounds = true

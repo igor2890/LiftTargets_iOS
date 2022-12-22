@@ -45,6 +45,6 @@ class Device {
     }
     
     func disconnect() {
-        DeviceManager.instance
+        DeviceManager.instance.disconnect(name: self.name)
     }
 }

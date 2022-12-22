@@ -10,10 +10,16 @@ import Foundation
 typealias Milliseconds = Int
 typealias IsDown = Bool
 
+enum TargetNotifType: String {
+    case start = "S"
+    case notif = "N"
+    case end = "E"
+}
+
 struct TargetNotification: CustomStringConvertible {
     let timeStamp: Milliseconds
     let targetStates: [IsDown]
-    let voltage: Double
+    let type: TargetNotifType
     
     var isAllUp: Bool {
         var result = true
@@ -28,7 +34,7 @@ struct TargetNotification: CustomStringConvertible {
     }
     
     var description: String {
-        return "At \(timeStamp) milliseconds targets are \(targetStates) \nBattery voltage is \(voltage)V"
+        return "At \(timeStamp) milliseconds targets are \(targetStates)"
     }
 }
 
@@ -51,12 +57,24 @@ class TargetNotificationConverter {
             array[4] & 1 == 1,
         ]
         
-        let voltage = Double(array[5]) / 10
+        
+        let char = String(bytes: [array[5]], encoding: .ascii)
+        var type: TargetNotifType
+        switch char {
+        case TargetNotifType.start.rawValue:
+            type = .start
+        case TargetNotifType.notif.rawValue:
+            type = .notif
+        case TargetNotifType.end.rawValue:
+            type = .end
+        default:
+            type = .notif
+        }
         
         return TargetNotification(
             timeStamp: timeStamp,
             targetStates: targetStates,
-            voltage: voltage)
+            type: type)
     }
 }
 

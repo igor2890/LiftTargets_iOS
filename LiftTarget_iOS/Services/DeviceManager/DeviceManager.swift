@@ -10,7 +10,7 @@ import CoreBluetooth
 
 protocol DeviceManagerDelegate {
     func didFindDevice(name: String)
-    func targetPushNotif(array: [UInt8])
+    func targetPushNotif(notif: TargetNotification)
     func gunDidShoot(player: Player)
     func errorHandler(errorMsg: String)
 }
@@ -25,7 +25,7 @@ protocol DeviceManagerForDelegates {
     func disconnect(name: String)
     func disconnectAll()
     func setPlayerForGun(player: Player, gun: String)
-    func liftTargetsAndAskForStatus()
+    func renewTarget()
 }
 
 protocol DeviceManagerForBluetoothManager {
@@ -90,7 +90,7 @@ extension DeviceManager: DeviceManagerForDelegates {
         gun.player = player
     }
     
-    func liftTargetsAndAskForStatus() {
+    func renewTarget() {
         guard let target = target else { return }
         bluetoothManager.sendMessageTo(device: target, msg: "+U")
     }
@@ -119,7 +119,8 @@ extension DeviceManager: DeviceManagerForBluetoothManager {
     
     func receivedNotif(bytes: [UInt8], from name: String){
         if name == target?.name {
-            delegate?.targetPushNotif(array: bytes)
+            let notification = TargetNotificationConverter.shared.convert(bytes: bytes)
+            delegate?.targetPushNotif(notif: notification)
         } else {
             guard let gun = guns.first(where: { $0.name == name }),
                   let player = gun.player

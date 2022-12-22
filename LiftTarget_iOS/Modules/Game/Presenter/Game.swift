@@ -149,10 +149,9 @@ class Game {
 extension Game: DeviceManagerDelegate {
     func didFindDevice(name: String) {}
     
-    func targetPushNotif(array: [UInt8]) {
-        let notification = TargetNotificationConverter.shared.convert(bytes: array)
-        gameVC.targetsView.setTargets(targetStates: notification.targetStates)
-        state.targetNotifReceive(targetNotification: notification)
+    func targetPushNotif(notif: TargetNotification) {
+        gameVC.targetsView.setTargets(targetStates: notif.targetStates)
+        state.targetNotifReceive(targetNotification: notif)
     }
     
     func gunDidShoot(player: Player) {

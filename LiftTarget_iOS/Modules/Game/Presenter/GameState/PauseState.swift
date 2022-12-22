@@ -35,8 +35,8 @@ class PauseState: AbstractGameState {
     }
     
     func greenButtonTapped() {
-        let currentDate = DispatchTime.now()
-        let pauseTime = (currentDate.uptimeNanoseconds - startPauseTime.uptimeNanoseconds) / 1000000
+        let stopPauseTime = DispatchTime.now()
+        let pauseTime = (stopPauseTime.uptimeNanoseconds - startPauseTime.uptimeNanoseconds) / 1000000
         if let session = game.currentPlayer.sessions.last {
             session.pauseTime += Int(pauseTime)
         }
